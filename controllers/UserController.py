@@ -1,11 +1,13 @@
 from utils.IMDbAPIUtils import *
+from utils.DynamoDBUtils import *
 
 def userGetKnownMovie(title):
     url = f"https://data-imdb1.p.rapidapi.com/movie/imdb_id/byTitle/{title}/"
     response = callIMDbAPI(url)
     imdb_id = response['results'][0]['imdb_id']
     url = f"https://data-imdb1.p.rapidapi.com/movie/id/{imdb_id}/"
-    return callIMDbAPI(url)
+    response = callIMDbAPI(url)
+    return response['results']
 
 def userGetUnknownMovie(genres, year_duration):
     results_dict = {}
@@ -27,5 +29,20 @@ def userSaveKnownMovieRequest():
     pass
 
 def userSaveUnknownMovieRequest():
+    pass
+
+def userGetMovieRequests():
+    pass
+
+def userDeleteMovieRequest():
+    pass
+
+def userEditMovieRequest():
+    pass
+
+def userGetProfile():
+    pass
+
+def userSaveProfile():
     pass
     
