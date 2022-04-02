@@ -1,11 +1,11 @@
-from distutils.log import debug
 from flask import Flask
-
+from controllers import AdminController
+from controllers import UserController
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
+@app.route('/User/KnownMovie')
+def userKnownMovie():
     return "index"
 
 
