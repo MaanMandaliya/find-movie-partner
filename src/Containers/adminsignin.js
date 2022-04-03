@@ -1,20 +1,39 @@
 import { useState } from "react";
-import { Auth } from "aws-amplify";
+import Amplify, { Auth } from "aws-amplify";
 
 import { useNavigate } from "react-router-dom";
+
 import * as React from "react";
-import applogo3 from "../IMAGES/applogo3.svg";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 import { Link } from "react-router-dom";
-//import jwt from "jsonwebtoken";
-import jwt from "jwt-decode";
+import applogo3 from "../IMAGES/applogo3.svg";
 
+const AdminSignIn = () => {
+  Amplify.configure({
+    Auth: {
+      // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
+      identityPoolId: "us-east-1:760a18b5-457a-449f-8708-edcdbb10afe8",
 
-const SignIn = () => {
+      // REQUIRED - Amazon Cognito Region
+      region: "us-east-1",
+
+      // OPTIONAL - Amazon Cognito Federated Identity Pool Region
+      // Required only if it's different from Amazon Cognito Region
+      identityPoolRegion: "us-east-1",
+
+      // OPTIONAL - Amazon Cognito User Pool ID
+      userPoolId: "us-east-1_XMmti7bAj",
+
+      // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+      userPoolWebClientId: "5jq8hc7obt9dk3btnmubhan7s0",
+      // authenticationFlowType: "USER_PASSWORD_AUTH",
+    },
+  });
+
   let navigate = useNavigate();
   const [field, setField] = useState({
     email: "",
@@ -34,9 +53,8 @@ const SignIn = () => {
     });
     if (res) {
       console.log("response====", res);
-      //jwt.decode(JSON.parse(res))
 
-      navigate("/HomePage");
+      navigate("/Home");
     }
   };
 
@@ -110,20 +128,6 @@ const SignIn = () => {
                 >
                   Signin
                 </Button>
-                <Link to="/Signup">
-                  {" "}
-                  <Typography
-                    variant="h5"
-                    style={{
-                      fontWeight: 600,
-                      color: "blue",
-                      textAlign: "end",
-                      textDecoration: "underline",
-                    }}
-                  >
-                    New User? SignUp Here
-                  </Typography>
-                </Link>
               </form>
             </Paper>
           </Grid>
@@ -133,4 +137,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default AdminSignIn;

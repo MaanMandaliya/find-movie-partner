@@ -1,9 +1,12 @@
 import React from "react";
-import movielogo from "../../movielogo.svg";
+import applogo3 from "../../IMAGES/applogo3.svg";
 
 import { RiLoginBoxFill } from "react-icons/ri";
-import { BsPersonPlusFill ,BsPower,BsQuestionSquareFill} from "react-icons/bs";
-
+import {
+  BsPersonPlusFill,
+  BsPower,
+  BsQuestionSquareFill,
+} from "react-icons/bs";
 
 import { Nav, NavLink, Bars, NavMenu } from "../NavElements/NavElements";
 import { Navbar, Container } from "react-bootstrap";
@@ -13,10 +16,11 @@ import { Typography } from "@mui/material";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
+
 const useStyles = makeStyles({
   root: {
     background: "#1A374D",
-    border:2,
+    border: 2,
     borderRadius: "30px",
     color: "white",
     height: 40,
@@ -31,6 +35,7 @@ const useStyles = makeStyles({
 });
 
 export default function Header(props) {
+ 
   const classes = useStyles();
 
   return (
@@ -42,10 +47,15 @@ export default function Header(props) {
         className="CustomNavbar"
       >
         <Container>
-        <Typography variant="h5" style={{ fontWeight: 200 ,color:"black",padding:"0rem"}}>
-            <img src={movielogo} alt="logo" className="App-logo"></img>
-                  Movie Partner
-                </Typography>
+          <Typography
+            variant="h5"
+            style={{ fontWeight: 200, color: "black", padding: "0rem" }}
+          >
+            <img src={applogo3} alt="logo" className="App-logo"></img>
+            Movie Partner
+           
+          </Typography>
+        
         </Container>
       </Navbar>
 
@@ -56,7 +66,8 @@ export default function Header(props) {
             Movies
           </Button>
           <Button variant="contained" className={classes.root}>
-            Help<BsQuestionSquareFill/>
+            Help
+            <BsQuestionSquareFill />
           </Button>
         </NavMenu>
 
@@ -70,8 +81,7 @@ export default function Header(props) {
             <BsPersonPlusFill /> Sign-up
           </NavLink>
           <NavLink to="/Signout">
-            <BsPower/> SignOut
-        
+            <BsPower /> SignOut
           </NavLink>
         </NavMenu>
       </Nav>

@@ -7,14 +7,13 @@ import Button from "@mui/material/Button";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 import { Link } from "react-router-dom";
-
-import movielogo from "../movielogo.svg";
+import applogo3 from "../IMAGES/applogo3.svg";
 import "../App.css";
 
 Amplify.configure({
   Auth: {
     // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
-    identityPoolId: "us-east-1:179e9484-c967-4aae-b8a6-293b77bcea39",
+    identityPoolId: "us-east-1:760a18b5-457a-449f-8708-edcdbb10afe8",
 
     // REQUIRED - Amazon Cognito Region
     region: "us-east-1",
@@ -24,10 +23,10 @@ Amplify.configure({
     identityPoolRegion: "us-east-1",
 
     // OPTIONAL - Amazon Cognito User Pool ID
-    userPoolId: "us-east-1_yMhTCnegf",
+    userPoolId: "us-east-1_chWAsK7Rx",
 
     // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-    userPoolWebClientId: "15e0q5lafvrb0a0nc0m9aiju6",
+    userPoolWebClientId: "651bv34tvusmr28pts0i0bk858",
     // authenticationFlowType: "USER_PASSWORD_AUTH",
   },
 });
@@ -82,7 +81,7 @@ const Signup = (props) => {
           
             <Paper elevation={4} style={{ padding: "2%",backgroundColor:"white" }}>
             <Typography variant="h3" style={{ fontWeight: 400 ,color:"goldenrod",textAlign:"center",textDecoration:"underline"}}>
-            <img src={movielogo} alt="logo" className="App-logo"></img>
+            <img src={applogo3} alt="logo" className="App-logo"></img>
                   Movie Partner
                 </Typography>
              

@@ -6,6 +6,7 @@ import "./Layout.css";
 import Header from "../Header/Header";
 import SideBar from "../SideBar/SideBar";
 
+
 export default function Layout(props) {
   const [open, setOpen] = useState(false);
 
@@ -21,6 +22,7 @@ export default function Layout(props) {
         <Header toggle={isToggle}  />
         <SideBar open={open} toggle={isToggle} />
         <div>{props.children}</div>
+        
       </div>
     </div>
   );

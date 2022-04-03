@@ -5,8 +5,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
+import applogo3 from "../IMAGES/applogo3.svg";
 
-import movielogo from "../movielogo.svg";
+
+
+
 import "../App.css";
 
 const ConfirmSignUp = (props) => {
@@ -38,6 +41,7 @@ const ConfirmSignUp = (props) => {
 
   return (
     <div>
+    
       <Grow in>
         <Container style={{ marginTop: 30, width: "97%" }}>
           <Grid item xs={6} md={12}>
@@ -54,7 +58,7 @@ const ConfirmSignUp = (props) => {
                   textDecoration: "underline",
                 }}
               >
-                <img src={movielogo} alt="logo" className="App-logo"></img>
+                <img src={applogo3} alt="logo" className="App-logo"></img>
                 Movie Partner
               </Typography>
 
@@ -97,6 +101,7 @@ const ConfirmSignUp = (props) => {
           </Grid>
         </Container>
       </Grow>
+   
     </div>
   );
 };

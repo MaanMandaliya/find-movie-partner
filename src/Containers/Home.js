@@ -3,24 +3,27 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
-import movielogo from "../movielogo.svg";
+
+import applogo1 from "../IMAGES/applogo3.svg";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
+
 
 const Home = () => {
   let navigate = useNavigate();
 
   const handleChange = (role) => {
     if (role === "Admin") {
-      navigate("/Signin");
+      navigate("/AdminSignin");
     }
     if (role === "User") {
-      navigate("/Signin");
+      navigate("/Signup");
     }
   };
 
   return (
-    <div>
+    <div >
+     
       <Grow in>
         <Container style={{ marginTop: 100, width: "97%" }}>
           <Grid item xs={6} md={12}>
@@ -37,7 +40,7 @@ const Home = () => {
                   textDecoration: "underline",
                 }}
               >
-                <img src={movielogo} alt="logo" className="App-logo"></img>
+                <img src={applogo1} alt="logo" className="App-logo"></img>
                 Movie Partner
               </Typography>
               <Typography variant="h5" style={{ fontWeight: 600,color:"black",textAlign:"center" }}>
@@ -78,7 +81,9 @@ const Home = () => {
           </Grid>
         </Container>
       </Grow>
+     
     </div>
+    
   );
 };
 export default Home;
