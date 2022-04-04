@@ -40,6 +40,7 @@ def GetUnknownMovie(genres, year_duration):
 
 def SaveMovieRequest(movieRequest):
     actual_request = movieRequest['request']
+    Email = movieRequest['Email']
     requestType = None
     movies = []
     if "1" in actual_request:
@@ -57,8 +58,35 @@ def SaveMovieRequest(movieRequest):
         'Movies': movies,
         'isMatched': False
     }
-    response = createItem(Item, 'User_Requests')
-    return response
+    message, status_code = createItem(Item, 'User_Requests')
+    if status_code == 200:
+        # Check SNS Subscriptions and send email
+        success = True
+        for movie in movies:
+            url = f"https://data-imdb1.p.rapidapi.com/movie/imdb_id/byTitle/{movie}/"
+            response = callIMDbAPI(url)
+            print(movie, response)
+            imdb_id = response['results'][0]['imdb_id']
+            topics = get_sns_topic_names()
+            # If topic does not exist then create it
+            if imdb_id not in topics:
+                topic_arn = create_sns_topic(imdb_id)
+            # If topic does exist then get topic arn
+            else:
+                topic_arn = get_sns_topic_arn(imdb_id)
+            # Item = readItem(
+            #     "Username", movieRequest['Username'], 'User_Profile')
+            response = subscribe_sns(
+                TopicArn=topic_arn, Protocol="email", Endpoint=Email)
+            if response['ResponseMetadata']['HTTPStatusCode'] != 200:
+                success = False
+        if success:
+            message += f". {len(movies)} Suscription emails has been sent to you. Please accept to find a movie partner for {movies}"
+            return message, 200
+        else:
+            return "Error Occured", 404
+    else:
+        return message, status_code
 
 
 def GetMovieRequests(Username):
@@ -77,10 +105,10 @@ def AddRatings(RequestID, Ratings, Username):
     Item = readItem("RequestID", RequestID, 'User_Requests')
     if Item['Username'] == Username:
         response = updateItem("Ratings", Ratings, RequestID, 'User_Requests')
-        print(response)
         return response
     else:
         return "Access Denied", 404
+
 
 def EditMovieRequest(NewRequest, RequestID, Username):
     Item = readItem("RequestID", RequestID, 'User_Requests')
@@ -113,7 +141,7 @@ def GetProfile(Username):
 
 
 def SaveProfile(profile):
-    user_email = profile['Email']
+    # user_email = profile['Email']
     Item = {
         "Username": profile['Username'],
         "Email": profile['Email'],
@@ -129,12 +157,5 @@ def SaveProfile(profile):
             "Amazon Prime": profile['OTT']['Prime']
         }
     }
-    message, status_code = createItem(Item, 'User_Profile')
-    if status_code == 200:
-        # Subscription to topic
-        response = subscribe_sns("arn:aws:sns:us-east-1:089564010209:FindMatch", "email", user_email)
-        if response['ResponseMetadata']['HTTPStatusCode']==200:
-            message += ". Email has been sent to you. Please subscribe to find movie partner!"
-            return message, 200
-    else:
-        return response
+    response = createItem(Item, 'User_Profile')
+    return response
