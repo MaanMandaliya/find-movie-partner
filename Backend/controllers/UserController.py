@@ -64,7 +64,7 @@ def GetUnknownMovie(genres, year_duration):
 def SaveKnownMovieRequest(movieRequest):
     actual_request = movieRequest['request']
     Item = {
-        'RequestID': random.randint(1,1000),
+        'RequestID': random.randint(1, 1000),
         'Username': movieRequest['Username'],
         'MovieRequest': actual_request,
         'RequestType': "Single",
@@ -82,7 +82,7 @@ def SaveUnknownMovieRequest(movieRequest):
     for value in actual_request.values():
         movies.append(value['title'])
     Item = {
-        'RequestID': random.randint(1,1000),
+        'RequestID': random.randint(1, 1000),
         'Username': movieRequest['Username'],
         'MovieRequest': actual_request,
         'RequestType': "Multiple",
@@ -101,7 +101,7 @@ def GetMovieRequests(Username):
 
 def DeleteMovieRequest(RequestID, Username):
     Item = getItem(RequestID)
-    if Item['Username']==Username:
+    if Item['Username'] == Username:
         response = deleteItem(RequestID)
         return response
 

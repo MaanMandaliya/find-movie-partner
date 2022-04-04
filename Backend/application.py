@@ -79,7 +79,7 @@ def adminEditMovieRequest():
     pass
 
 
-@app.route('/Admin/DeleteMovieRequest', methods=['DELETE'])
+@app.route('/Admin/DeleteMovieRequest', methods=['POST'])
 def adminDeleteMovieRequest():
     RequestID = request.json['RequestID']
     response = AdminController.DeleteMovieRequest(RequestID)

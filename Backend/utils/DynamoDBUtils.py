@@ -19,11 +19,12 @@ def saveItem(databaseItem):
     )
     return response
 
+
 def getItem(primarykey):
     dynamodb = get_dynamodb()
     table = dynamodb.Table('User_Requests')
     response = table.get_item(
-        Key={'RequestID':primarykey}
+        Key={'RequestID': primarykey}
     )
     return response['Item']
 
@@ -58,6 +59,6 @@ def deleteItem(primarykey):
     dynamodb = get_dynamodb()
     table = dynamodb.Table('User_Requests')
     response = table.delete_item(
-        Key={'RequestID':primarykey}
+        Key={'RequestID': primarykey}
     )
     return response
