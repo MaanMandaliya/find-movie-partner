@@ -57,7 +57,9 @@ def userDeleteMovieRequest():
 def userEditMovieRequest():
     RequestID = request.json['RequestID']
     Username = request.json['Username']
-    pass
+    NewRequest = request.json['NewRequest']
+    response = UserController.EditMovieRequest(NewRequest, RequestID, Username)
+    return response
 
 #check the request persist to user or not
 @app.route('/User/AddRatings', methods=['POST'])

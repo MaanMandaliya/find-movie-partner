@@ -76,9 +76,25 @@ def AddRatings(RequestID, Ratings):
     return response
 
 
-def EditMovieRequest():
-    pass
-
+def EditMovieRequest(NewRequest, RequestID, Username):
+    Item = readItem("RequestID", RequestID, 'User_Requests')
+    if Item['Username'] == Username: 
+        message, status_code = updateItem("MovieRequest",NewRequest,RequestID,'User_Requests')
+        if status_code == 200:
+            Movies = []
+            if "1" in NewRequest:
+                for value in NewRequest.values():
+                    Movies.append(value['title'])
+                    RequestType = "Multiple"
+            else:
+                Movies.append(NewRequest['title'])
+                RequestType = "Single"
+            message, status_code = updateItem("Movies",Movies,RequestID,'User_Requests')
+            message, status_code = updateItem("RequestType",RequestType,RequestID,'User_Requests')
+            if status_code == 200:
+                return message, status_code
+    else:
+        return "Access Denied", 404
 
 def GetProfile(Username):
     response = readItem("Username", Username, "User_Profile")

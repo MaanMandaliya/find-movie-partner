@@ -60,9 +60,9 @@ def updateItem(updateKey, updateValue, primaryKeyValue, TableName):
     table = dynamodb.Table(TableName)
     response = table.update_item(
         Key={"RequestID": primaryKeyValue},
-        UpdateExpression=f"SET {updateKey}= :newRatings",
+        UpdateExpression=f"SET {updateKey}= :newKey",
         ExpressionAttributeValues={
-            ':newRatings': updateValue
+            ':newKey': updateValue
         },
         ReturnValues="UPDATED_NEW")
     updateDict = {updateKey:updateValue}
