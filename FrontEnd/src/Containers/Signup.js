@@ -12,9 +12,6 @@ import "../App.css";
 
 Amplify.configure({
   Auth: {
-    // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
-    identityPoolId: "us-east-1:760a18b5-457a-449f-8708-edcdbb10afe8",
-
     // REQUIRED - Amazon Cognito Region
     region: "us-east-1",
 
@@ -27,6 +24,7 @@ Amplify.configure({
 
     // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
     userPoolWebClientId: "651bv34tvusmr28pts0i0bk858",
+
     // authenticationFlowType: "USER_PASSWORD_AUTH",
   },
 });
@@ -75,19 +73,31 @@ const Signup = (props) => {
 
   return (
     <div>
-      <Grow in >
+      <Grow in>
         <Container style={{ marginTop: 30, width: "97%" }}>
           <Grid item xs={6} md={12}>
-          
-            <Paper elevation={4} style={{ padding: "2%",backgroundColor:"white" }}>
-            <Typography variant="h3" style={{ fontWeight: 400 ,color:"goldenrod",textAlign:"center",textDecoration:"underline"}}>
-            <img src={applogo3} alt="logo" className="App-logo"></img>
-                  Movie Partner
-                </Typography>
-             
+            <Paper
+              elevation={4}
+              style={{ padding: "2%", backgroundColor: "white" }}
+            >
+              <Typography
+                variant="h3"
+                style={{
+                  fontWeight: 400,
+                  color: "goldenrod",
+                  textAlign: "center",
+                  textDecoration: "underline",
+                }}
+              >
+                <img src={applogo3} alt="logo" className="App-logo"></img>
+                Movie Partner
+              </Typography>
 
               <form onSubmit={submitData}>
-                <Typography variant="h5" style={{ fontWeight: 600,color:"black" }}>
+                <Typography
+                  variant="h5"
+                  style={{ fontWeight: 600, color: "black" }}
+                >
                   SignUp Page
                 </Typography>
 
@@ -149,7 +159,12 @@ const Signup = (props) => {
                   {" "}
                   <Typography
                     variant="h5"
-                    style={{ fontWeight: 600, color: "blue" ,textAlign:"end",textDecoration:"underline"}}
+                    style={{
+                      fontWeight: 600,
+                      color: "blue",
+                      textAlign: "end",
+                      textDecoration: "underline",
+                    }}
                   >
                     Already Have an Account?Click here for SignIn
                   </Typography>

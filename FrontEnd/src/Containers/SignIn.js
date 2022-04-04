@@ -11,8 +11,7 @@ import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 //import jwt from "jsonwebtoken";
-import jwt from "jwt-decode";
-
+import jwt_decode from "jwt-decode";
 
 const SignIn = () => {
   let navigate = useNavigate();
@@ -34,9 +33,13 @@ const SignIn = () => {
     });
     if (res) {
       console.log("response====", res);
-      //jwt.decode(JSON.parse(res))
 
-      navigate("/HomePage");
+      const decodedToken = jwt_decode(res.signInUserSession.idToken.jwtToken);
+      if (decodedToken) {
+        navigate("/HomePage");
+      } else {
+        alert("UnAuthorized");
+      }
     }
   };
 

@@ -8,6 +8,7 @@ import Home from "./Containers/Home";
 import Homepage from "./Containers/HomePage";
 import SignIn from "./Containers/SignIn";
 import Search from "./Containers/Search";
+import SeeMovie from "./Containers/SeeMovie";
 
 import Signup from "./Containers/Signup";
 import FindMovie from "./Containers/FindMovie";
@@ -16,11 +17,13 @@ import AdminSignIn from "./Containers/adminsignin";
 
 import SelectYear from "./Containers/SelectYear";
 import SelectTypes from "./Containers/SelectType";
+import Signout from "./Containers/Signout";
 
 const App = () => {
   const [dataState, setDataState] = useState();
   const [gtype, SelectType] = useState();
   const [year, setYear] = useState();
+  const [title, setTitle] = useState();
 
   const signUpData = (data) => {
     console.log("***********", data);
@@ -35,8 +38,11 @@ const App = () => {
     console.log("props from selected year====", years);
     setYear(years);
   };
+  const dataFromSearch = (title) => {
+    console.log("props from search====", title);
+    setTitle(title);
+  };
 
-  console.log("dataState-----------", dataState);
   return (
     <div>
       <BrowserRouter>
@@ -44,11 +50,15 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/Signin" element={<SignIn />}></Route>
           <Route path="/AdminSignin" element={<AdminSignIn />}></Route>
-          <Route path="/Search" element={<Search />}></Route>
+          <Route
+            path="/Search"
+            element={<Search dataFromSearch={dataFromSearch} />}
+          ></Route>
           <Route
             path="/Signup"
             element={<Signup dataFromSignUp={signUpData} />}
           />
+          <Route path="/Signout" element={<Signout />} />
           <Route
             path="/SelectType"
             element={<SelectTypes genreType={genreTypes} />}
@@ -58,6 +68,9 @@ const App = () => {
               path="/confirmSignUp"
               element={<ConfirmSignUp dataToSignIn={dataState} />}
             />
+          )}
+          {title && (
+            <Route path="/SeeMovie" element={<SeeMovie title={title} />} />
           )}
 
           <Route path="/HomePage" element={<Homepage />} />

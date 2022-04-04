@@ -26,52 +26,45 @@ const FindMovie = (props) => {
     })
       .then((response) => response.json())
       .then((movies) => {
+        console.log("length==", Object.keys(movies).length);
         setMovieState(movies);
-        // console.log("movies===", movies['1']['title']);
-
-        // var length = Object.keys(movies).length;
-        // console.log("length==", length);
-        // for (var i = 1; i < length; i++) {
-
-        //   var s = String(i);
-
-        //   console.log(movies[s]['title']);
-        // }
       });
-  }, []);
+  }, [genre, years]);
 
   const seeMovies = () => {
+  
     var length = Object.keys(movieState).length;
 
     for (var i = 1; i < length; i++) {
+      
       var s = String(i);
-      return (
-        <Grid item xs={4} sm={4} md={4}>
-          <Card variant="outlined" sx={{ maxwidth: 345 }}>
-            <CardMedia
-              component="img"
-              height="250"
-              image={movieState[s]["image_url"]}
-              alt="green iguana"
-            />
-            <CardContent
-              style={{
-                backgroundColor: "#11999E",
-                color: "white",
-              }}
-            >
-              <Typography gutterBottom align="center">
-                title:{movieState[s]["title"]}
-              </Typography>
-              <Typography gutterBottom align="center">
-                IMDB_ID:{movieState[s]["id"]}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      );
-    }
+      return(
+      <Grid item xs={4} sm={4} md={4}>
+        <Card variant="outlined" sx={{ maxwidth: 345 }}>
+          <CardMedia
+            component="img"
+            height="250"
+            image={movieState[s]["image_url"]}
+            alt="green iguana"
+          />
+          <CardContent
+            style={{
+              backgroundColor: "#11999E",
+              color: "white",
+            }}
+          >
+            <Typography gutterBottom align="center">
+              title:{movieState[s]["title"]}
+            </Typography>
+            <Typography gutterBottom align="center">
+              IMDB_ID:{movieState[s]["imdb_id"]}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    )}
   };
+  const mmm = seeMovies();
   return (
     <div>
       <Layout>
@@ -83,7 +76,7 @@ const FindMovie = (props) => {
                 spacing={{ xs: 2, md: 3 }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
               >
-                {seeMovies}
+                {mmm}
               </Grid>
             </Grid>
           </div>

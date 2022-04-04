@@ -5,12 +5,15 @@ import Footer from "../Components/Footer/footer";
 import TextField from "@mui/material/TextField";
 import { Button, CardContent } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { CardMedia, Card } from "@mui/material";
+import { CardMedia, Card, Typography } from "@mui/material";
 import movie from "../IMAGES/movie.svg";
+import { useNavigate } from "react-router-dom";
 
-const Search = () => {
+const Search = (props) => {
+  let navigate = useNavigate();
   const [searchstate, setSearchState] = useState({
     title: "",
+   
   });
 
   const titleHandler = (event) => {
@@ -20,32 +23,29 @@ const Search = () => {
   console.log("titlestate==", searchstate);
 
   const findMovie = () => {
-    fetch("http://localhost:5000/User/KnownMovie", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({title:searchstate.title}),
-    }).then((res)=>res.json()).then(data=>{
-      console.log("data===",data);
-    })
+    props.dataFromSearch(searchstate.title);
+    navigate("/SeeMovie");
   };
 
   return (
     <div>
       <Layout>
-        <aside>
-          <Grid sx={{ flexGrow: 1 }} container spacing={2}>
-            <Grid style={{ marginBlockStart: "50px" }} item xs={12}>
+        <Grid sx={{ flexGrow: 1 }} container spacing={2}>
+          <Grid
+            style={{ marginBlockStart: "30px", marginBlockEnd: "30px" }}
+            item
+            xs={12}
+          >
+            <Grid container justifyContent="center" spacing={5}>
               <Grid item>
                 <Card
                   sx={{
-                    height: 400,
-                    width: 200,
+                    height: 500,
+                    width: 400,
                     backgroundColor: "lightgoldenrodyellow",
                   }}
                 >
-                  <CardMedia component="img" height="150" image={movie} />
+                  <CardMedia component="img" height="250" image={movie} />
                   <br />
                   <CardContent>
                     <TextField
@@ -56,6 +56,7 @@ const Search = () => {
                       value={searchstate.title}
                       name="title"
                       onChange={titleHandler}
+                      style={{ marginLeft: "80px" }}
                     />
                     <br />
 
@@ -64,7 +65,7 @@ const Search = () => {
                         backgroundColor: "#1A374D",
                         borderColor: "white",
                         color: "white",
-                        marginLeft: "30px",
+                        marginLeft: "130px",
                       }}
                       type="submit"
                       onClick={findMovie}
@@ -76,7 +77,8 @@ const Search = () => {
               </Grid>
             </Grid>
           </Grid>
-        </aside>
+        </Grid>
+       
       </Layout>
       <Footer />
     </div>

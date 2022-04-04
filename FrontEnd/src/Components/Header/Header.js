@@ -62,9 +62,10 @@ export default function Header(props) {
       <Nav>
         <div></div>
         <NavMenu>
-          <Button variant="contained" className={classes.root}>
-            Movies
+        <NavLink to="/HomePage"> <Button variant="contained" className={classes.root}>
+            Homepage
           </Button>
+          </NavLink>
           <Button variant="contained" className={classes.root}>
             Help
             <BsQuestionSquareFill />
