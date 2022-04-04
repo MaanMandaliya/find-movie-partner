@@ -1,8 +1,10 @@
 from flask import Flask, request
+from flask_cors import CORS
 from controllers import AdminController
 from controllers import UserController
 
 app = Flask(__name__)
+CORS(app)
 
 # User Features
 
