@@ -2,7 +2,6 @@ from urllib import response
 from configs import AWSConfig
 import boto3
 from boto3.dynamodb.conditions import Key
-import json
 
 
 def get_dynamodb():
@@ -19,6 +18,14 @@ def saveItem(databaseItem):
         Item=databaseItem
     )
     return response
+
+def getItem(primarykey):
+    dynamodb = get_dynamodb()
+    table = dynamodb.Table('User_Requests')
+    response = table.get_item(
+        Key={'RequestID':primarykey}
+    )
+    return response['Item']
 
 
 def queryItems(searchKey, searchValue):

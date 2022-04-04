@@ -7,5 +7,6 @@ def GetAllUserMovieRequests():
 def EditMovieRequest():
     pass
 
-def DeleteMovieRequest():
-    pass
+def DeleteMovieRequest(RequestID):
+    response = deleteItem(RequestID)
+    return response

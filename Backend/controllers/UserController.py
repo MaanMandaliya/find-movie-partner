@@ -99,9 +99,11 @@ def GetMovieRequests(Username):
     return response
 
 
-def DeleteMovieRequest(RequestID):
-    response = deleteItem(RequestID)
-    return response
+def DeleteMovieRequest(RequestID, Username):
+    Item = getItem(RequestID)
+    if Item['Username']==Username:
+        response = deleteItem(RequestID)
+        return response
 
 
 def EditMovieRequest():

@@ -1,8 +1,6 @@
 from flask import Flask, request
 from controllers import AdminController
 from controllers import UserController
-import requests
-import json
 
 app = Flask(__name__)
 
@@ -48,7 +46,8 @@ def userGetMovieRequests():
 @app.route('/User/DeleteMovieRequest', methods=['POST'])
 def userDeleteMovieRequest():
     RequestID = request.json['RequestID']
-    response = UserController.DeleteMovieRequest(RequestID)
+    Username = request.json['Username']
+    response = UserController.DeleteMovieRequest(RequestID, Username)
     return response
 
 
@@ -82,7 +81,9 @@ def adminEditMovieRequest():
 
 @app.route('/Admin/DeleteMovieRequest', methods=['DELETE'])
 def adminDeleteMovieRequest():
-    pass
+    RequestID = request.json['RequestID']
+    response = AdminController.DeleteMovieRequest(RequestID)
+    return response
 
 
 if __name__ == "__main__":
