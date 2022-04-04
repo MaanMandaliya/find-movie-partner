@@ -61,6 +61,7 @@ const SelectTypes = (props) => {
       }
       localStorage.setItem("genres", selectState);
     };
+    console.log("state items==",selectState);
   
     const selectYear = () => {
       console.log("statevalue=", selectState);

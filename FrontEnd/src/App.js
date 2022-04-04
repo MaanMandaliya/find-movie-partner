@@ -7,6 +7,7 @@ import { useState } from "react";
 import Home from "./Containers/Home";
 import Homepage from "./Containers/HomePage";
 import SignIn from "./Containers/SignIn";
+import Search from "./Containers/Search";
 
 import Signup from "./Containers/Signup";
 import FindMovie from "./Containers/FindMovie";
@@ -43,7 +44,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/Signin" element={<SignIn />}></Route>
           <Route path="/AdminSignin" element={<AdminSignIn />}></Route>
-
+          <Route path="/Search" element={<Search />}></Route>
           <Route
             path="/Signup"
             element={<Signup dataFromSignUp={signUpData} />}
@@ -67,10 +68,7 @@ const App = () => {
             />
           )}
           {year && (
-            <Route
-              path="/FindMovie"
-              element={<FindMovie forMovies={year} />}
-            />
+            <Route path="/FindMovie" element={<FindMovie forMovies={year} />} />
           )}
         </Routes>
       </BrowserRouter>

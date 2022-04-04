@@ -12,15 +12,16 @@ const FindMovie = (props) => {
   let years = [];
   years.push(initialDate.getFullYear());
   years.push(endDate.getFullYear());
+  console.log("yearrange===",years);
 
   useEffect(() => {
-    fetch("http://localhost:3000/User/UnknownMovie", {
+    fetch("http://localhost:5000/User/UnknownMovie", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        yearrange: years,
+      body:{
+        year_duration: years,
         genres: genre,
-      }),
+      },
     })
       .then((response) => response.json())
       .then((movies) => {

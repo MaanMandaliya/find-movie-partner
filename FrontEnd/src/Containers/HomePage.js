@@ -12,6 +12,7 @@ import {
   CardMedia,
 } from "@mui/material";
 import stranger from "../IMAGES/stranger.svg";
+import known from "../IMAGES/known.svg";
 import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
@@ -19,6 +20,9 @@ const Homepage = () => {
 
   const handleUnknown = () => {
     navigate("/SelectType");
+  };
+  const handleKnown = () => {
+    navigate("/Search");
   };
   const Card = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -43,6 +47,13 @@ const Homepage = () => {
                 >
                   <CardActionArea>
                     <CardActions>
+                    <CardMedia
+                        component="img"
+                        height="100"
+                        image={known}
+                        alt="green iguana"
+                        onClick={handleKnown}
+                      />
                       <Typography gutterBottom variant="button">
                         Known Movie Partner
                       </Typography>
