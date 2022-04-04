@@ -1,3 +1,4 @@
+from urllib import response
 from flask import Flask, request
 from flask_cors import CORS
 from controllers import AdminController
@@ -53,10 +54,17 @@ def userDeleteMovieRequest():
     return response
 
 
-@app.route('/User/EditMovieRequest', methods=['UPDATE'])
+@app.route('/User/EditMovieRequest', methods=['POST'])
 def userEditMovieRequest():
     pass
 
+#check the request persist to user or not
+@app.route('/User/AddRatings', methods=['POST'])
+def userAddRatings():
+    RequestID = request.json['RequestID']
+    Ratings = request.json['Ratings']
+    response = UserController.AddRatings(RequestID, Ratings)
+    return response
 
 @app.route('/User/GetProfile', methods=['GET'])
 def userGetProfile():

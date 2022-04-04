@@ -11,7 +11,7 @@ def get_dynamodb():
     return dynamodb
 
 
-def saveItem(databaseItem):
+def createItem(databaseItem):
     dynamodb = get_dynamodb()
     table = dynamodb.Table('User_Requests')
     response = table.put_item(
@@ -20,7 +20,7 @@ def saveItem(databaseItem):
     return response
 
 
-def getItem(primarykey):
+def readItem(primarykey):
     dynamodb = get_dynamodb()
     table = dynamodb.Table('User_Requests')
     response = table.get_item(
@@ -53,6 +53,20 @@ def readAllItems():
         response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
         data.extend(response['Items'])
     return {"Items": data}
+
+
+def updateItem(updateKey, updateValue, primaryKeyValue):
+    dynamodb = get_dynamodb()
+    table = dynamodb.Table('User_Requests')
+    response = table.update_item(
+        Key={"RequestID": primaryKeyValue},
+        UpdateExpression=f"SET {updateKey}= :newRatings",
+        ExpressionAttributeValues={
+            ':newRatings': updateValue
+        },
+        ReturnValues="UPDATED_NEW")
+    print(response)
+    return response
 
 
 def deleteItem(primarykey):

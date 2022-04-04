@@ -2,31 +2,6 @@ from utils.IMDbAPIUtils import *
 from utils.DynamoDBUtils import *
 import random
 
-# def userGetKnownMovie(title):
-#     url = f"https://data-imdb1.p.rapidapi.com/movie/imdb_id/byTitle/{title}/"
-#     response = callIMDbAPI(url)
-#     imdb_id = response['results'][0]['imdb_id']
-#     url = f"https://data-imdb1.p.rapidapi.com/movie/id/{imdb_id}/"
-#     response = callIMDbAPI(url)
-#     return response['results']
-
-# def userGetUnknownMovie(genres, year_duration):
-#     results_dict = {}
-#     for genre in genres:
-#         for year in year_duration:
-#             url = f"https://data-imdb1.p.rapidapi.com/movie/byYear/{year}/byGen/{genre}/"
-#             querystring = {"page_size": "5"}
-#             temp_result = callIMDbAPI(url, params=querystring)
-#             for result_dict in temp_result['results']:
-#                 imdb_id = result_dict['imdb_id']
-#                 if imdb_id not in results_dict.keys():
-#                     url = f"https://data-imdb1.p.rapidapi.com/movie/id/{imdb_id}/"
-#                     temp_response = callIMDbAPI(url)
-#                     image_url = temp_response['results']['image_url']
-#                     results_dict[imdb_id] = [result_dict['title'], image_url]
-#     return results_dict
-
-
 def GetKnownMovie(title):
     url = f"https://data-imdb1.p.rapidapi.com/movie/imdb_id/byTitle/{title}/"
     response = callIMDbAPI(url)
@@ -71,7 +46,7 @@ def SaveKnownMovieRequest(movieRequest):
         'Movies': [actual_request['title']],
         'isMatched': False
     }
-    response = saveItem(Item)
+    response = createItem(Item)
     if response["ResponseMetadata"]['HTTPStatusCode'] == 200:
         return response
 
@@ -89,7 +64,7 @@ def SaveUnknownMovieRequest(movieRequest):
         'Movies': movies,
         'isMatched': False
     }
-    response = saveItem(Item)
+    response = createItem(Item)
     if response["ResponseMetadata"]['HTTPStatusCode'] == 200:
         return response
 
@@ -100,11 +75,14 @@ def GetMovieRequests(Username):
 
 
 def DeleteMovieRequest(RequestID, Username):
-    Item = getItem(RequestID)
+    Item = readItem(RequestID)
     if Item['Username'] == Username:
         response = deleteItem(RequestID)
         return response
 
+def AddRatings(RequestID, Ratings):
+    response = updateItem("Ratings", Ratings, RequestID)
+    return response
 
 def EditMovieRequest():
     pass
