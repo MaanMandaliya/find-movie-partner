@@ -1,4 +1,3 @@
-from urllib import response
 from configs import AWSConfig
 import boto3
 from boto3.dynamodb.conditions import Key
