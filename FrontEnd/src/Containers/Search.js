@@ -20,7 +20,7 @@ const Search = () => {
   console.log("titlestate==", searchstate);
 
   const findMovie = () => {
-    fetch("http://localhost:5000/User/KnownMovies", {
+    fetch("http://localhost:5000/User/KnownMovie", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

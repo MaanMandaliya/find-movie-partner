@@ -33,10 +33,6 @@ const FindMovie = (props) => {
 
           var s = String(i);
 
-
-
-
-
           console.log(movies[s]['title']);
         }
       });
