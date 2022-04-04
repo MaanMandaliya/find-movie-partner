@@ -14,5 +14,5 @@ def EditMovieRequest():
 
 
 def DeleteMovieRequest(RequestID):
-    response = deleteItem(RequestID, 'User_Requests')
+    response = deleteItem("RequestID",RequestID, 'User_Requests')
     return response

@@ -17,7 +17,8 @@ def createItem(databaseItem, TableName):
     response = table.put_item(
         Item=databaseItem
     )
-    return response
+    if response["ResponseMetadata"]['HTTPStatusCode'] == 200:
+        return "Successfully Request Inserted", 200
 
 
 def readItem(primaryKeyName, primaryKeyValue, TableName):
@@ -67,13 +68,14 @@ def updateItem(updateKey, updateValue, primaryKeyValue, TableName):
         ReturnValues="UPDATED_NEW")
     updateDict = {updateKey:updateValue}
     if response['Attributes'] == updateDict and response["ResponseMetadata"]['HTTPStatusCode'] == 200:
-        return "Successfully Updated Data", 200
+        return "Successfully Request Updated", 200
 
 
-def deleteItem(primarykey, TableName):
+def deleteItem(primaryKeyName, primaryKeyValue, TableName):
     dynamodb = get_dynamodb()
     table = dynamodb.Table(TableName)
     response = table.delete_item(
-        Key={'RequestID': primarykey}
+        Key={primaryKeyName: primaryKeyValue}
     )
-    return response
+    if response["ResponseMetadata"]['HTTPStatusCode'] == 200:
+        return "Successfully Request Deleted", 200

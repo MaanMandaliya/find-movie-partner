@@ -48,8 +48,7 @@ def SaveKnownMovieRequest(movieRequest):
         'isMatched': False
     }
     response = createItem(Item, 'User_Requests')
-    if response["ResponseMetadata"]['HTTPStatusCode'] == 200:
-        return response
+    return response
 
 
 def SaveUnknownMovieRequest(movieRequest):
@@ -66,8 +65,7 @@ def SaveUnknownMovieRequest(movieRequest):
         'isMatched': False
     }
     response = createItem(Item, 'User_Requests')
-    if response["ResponseMetadata"]['HTTPStatusCode'] == 200:
-        return response
+    return response
 
 
 def GetMovieRequests(Username):
@@ -78,7 +76,7 @@ def GetMovieRequests(Username):
 def DeleteMovieRequest(RequestID, Username):
     Item = readItem("RequestID", RequestID, 'User_Requests')
     if Item['Username'] == Username:
-        response = deleteItem(RequestID, 'User_Requests')
+        response = deleteItem("RequestID", RequestID, 'User_Requests')
         return response
 
 
