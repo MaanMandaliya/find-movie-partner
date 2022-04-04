@@ -76,12 +76,13 @@ def userGetProfile():
     response = UserController.GetProfile(Username)
     return response
 
-
+# SNS Subscription during saving user profile
 @app.route('/User/SaveProfile', methods=['POST'])
 def userSaveProfile():
     profile = request.json
     response = UserController.SaveProfile(profile)
     return response
+
 
 # Admin Features
 

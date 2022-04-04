@@ -1,5 +1,6 @@
 from utils.IMDbAPIUtils import *
 from utils.DynamoDBUtils import *
+from utils.SNSUtils import *
 import random
 
 
@@ -112,6 +113,7 @@ def GetProfile(Username):
 
 
 def SaveProfile(profile):
+    user_email = profile['Email']
     Item = {
         "Username": profile['Username'],
         "Email": profile['Email'],
@@ -127,5 +129,12 @@ def SaveProfile(profile):
             "Amazon Prime": profile['OTT']['Prime']
         }
     }
-    response = createItem(Item, 'User_Profile')
-    return response
+    message, status_code = createItem(Item, 'User_Profile')
+    if status_code == 200:
+        # Subscription to topic
+        response = subscribe_sns("arn:aws:sns:us-east-1:089564010209:FindMatch", "email", user_email)
+        if response['ResponseMetadata']['HTTPStatusCode']==200:
+            message += ". Email has been sent to you. Please subscribe to find movie partner!"
+            return message, 200
+    else:
+        return response
