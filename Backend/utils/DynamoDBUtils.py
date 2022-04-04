@@ -11,27 +11,27 @@ def get_dynamodb():
     return dynamodb
 
 
-def createItem(databaseItem):
+def createItem(databaseItem, TableName):
     dynamodb = get_dynamodb()
-    table = dynamodb.Table('User_Requests')
+    table = dynamodb.Table(TableName)
     response = table.put_item(
         Item=databaseItem
     )
     return response
 
 
-def readItem(primarykey):
+def readItem(primaryKeyName, primaryKeyValue, TableName):
     dynamodb = get_dynamodb()
-    table = dynamodb.Table('User_Requests')
+    table = dynamodb.Table(TableName)
     response = table.get_item(
-        Key={'RequestID': primarykey}
+        Key={primaryKeyName: primaryKeyValue}
     )
     return response['Item']
 
 
-def queryItems(searchKey, searchValue):
+def queryItems(searchKey, searchValue, TableName):
     dynamodb = get_dynamodb()
-    table = dynamodb.Table('User_Requests')
+    table = dynamodb.Table(TableName)
     response = table.scan(
         FilterExpression=Key(searchKey).eq(searchValue)
     )
@@ -43,9 +43,9 @@ def queryItems(searchKey, searchValue):
     return {"Items": data}
 
 
-def readAllItems():
+def readAllItems(TableName):
     dynamodb = get_dynamodb()
-    table = dynamodb.Table('User_Requests')
+    table = dynamodb.Table(TableName)
     response = table.scan()
     data = response['Items']
     while 'LastEvaluatedKey' in response:
@@ -55,9 +55,9 @@ def readAllItems():
     return {"Items": data}
 
 
-def updateItem(updateKey, updateValue, primaryKeyValue):
+def updateItem(updateKey, updateValue, primaryKeyValue, TableName):
     dynamodb = get_dynamodb()
-    table = dynamodb.Table('User_Requests')
+    table = dynamodb.Table(TableName)
     response = table.update_item(
         Key={"RequestID": primaryKeyValue},
         UpdateExpression=f"SET {updateKey}= :newRatings",
@@ -69,9 +69,9 @@ def updateItem(updateKey, updateValue, primaryKeyValue):
     return response
 
 
-def deleteItem(primarykey):
+def deleteItem(primarykey, TableName):
     dynamodb = get_dynamodb()
-    table = dynamodb.Table('User_Requests')
+    table = dynamodb.Table(TableName)
     response = table.delete_item(
         Key={'RequestID': primarykey}
     )

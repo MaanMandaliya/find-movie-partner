@@ -66,14 +66,18 @@ def userAddRatings():
     response = UserController.AddRatings(RequestID, Ratings)
     return response
 
-@app.route('/User/GetProfile', methods=['GET'])
+@app.route('/User/GetProfile', methods=['POST'])
 def userGetProfile():
-    pass
+    Username = request.json['Username']
+    response = UserController.GetProfile(Username)
+    return response
 
 
 @app.route('/User/SaveProfile', methods=['POST'])
 def userSaveProfile():
-    pass
+    profile = request.json
+    response = UserController.SaveProfile(profile)
+    return response
 
 # Admin Features
 

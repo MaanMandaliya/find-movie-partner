@@ -2,6 +2,7 @@ from utils.IMDbAPIUtils import *
 from utils.DynamoDBUtils import *
 import random
 
+
 def GetKnownMovie(title):
     url = f"https://data-imdb1.p.rapidapi.com/movie/imdb_id/byTitle/{title}/"
     response = callIMDbAPI(url)
@@ -46,7 +47,7 @@ def SaveKnownMovieRequest(movieRequest):
         'Movies': [actual_request['title']],
         'isMatched': False
     }
-    response = createItem(Item)
+    response = createItem(Item, 'User_Requests')
     if response["ResponseMetadata"]['HTTPStatusCode'] == 200:
         return response
 
@@ -64,33 +65,52 @@ def SaveUnknownMovieRequest(movieRequest):
         'Movies': movies,
         'isMatched': False
     }
-    response = createItem(Item)
+    response = createItem(Item, 'User_Requests')
     if response["ResponseMetadata"]['HTTPStatusCode'] == 200:
         return response
 
 
 def GetMovieRequests(Username):
-    response = queryItems('Username', Username)
+    response = queryItems('Username', Username, 'User_Requests')
     return response
 
 
 def DeleteMovieRequest(RequestID, Username):
-    Item = readItem(RequestID)
+    Item = readItem(RequestID, 'User_Requests')
     if Item['Username'] == Username:
-        response = deleteItem(RequestID)
+        response = deleteItem(RequestID, 'User_Requests')
         return response
 
+
 def AddRatings(RequestID, Ratings):
-    response = updateItem("Ratings", Ratings, RequestID)
+    response = updateItem("Ratings", Ratings, RequestID, 'User_Requests')
     return response
+
 
 def EditMovieRequest():
     pass
 
 
-def GetProfile():
-    pass
+def GetProfile(Username):
+    response = readItem("Username", Username, "User_Profile")
+    return response
 
 
-def SaveProfile():
-    pass
+def SaveProfile(profile):
+    Item = {
+        "Username": profile['Username'],
+        "Email": profile['Email'],
+        "Age": profile['Age'],
+        "Gender": profile['Gender'],
+        "Social Media Profiles": {
+            "Instagram": profile['SocialMedia']['Instagram'],
+            "Facebook": profile['SocialMedia']['Facebook']
+        },
+        "OTT Subscriptions": {
+            "Hotstar": profile['OTT']['Hotstar'],
+            "Netflix": profile['OTT']['Netflix'],
+            "Amazon Prime": profile['OTT']['Prime']
+        }
+    }
+    response = createItem(Item, 'User_Profile')
+    return response
