@@ -1,4 +1,3 @@
-from urllib import response
 from flask import Flask, request
 from controllers import AdminController
 from controllers import UserController
