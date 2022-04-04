@@ -61,13 +61,14 @@ def userEditMovieRequest():
     response = UserController.EditMovieRequest(NewRequest, RequestID, Username)
     return response
 
-#check the request persist to user or not
 @app.route('/User/AddRatings', methods=['POST'])
 def userAddRatings():
     RequestID = request.json['RequestID']
     Ratings = request.json['Ratings']
-    response = UserController.AddRatings(RequestID, Ratings)
+    Username = request.json['Username']
+    response = UserController.AddRatings(RequestID, Ratings, Username)
     return response
+
 
 @app.route('/User/GetProfile', methods=['POST'])
 def userGetProfile():
@@ -91,9 +92,13 @@ def adminGetAllUserMovieRequests():
     return response
 
 
-@app.route('/Admin/EditMovieRequest', methods=['UPDATE'])
+@app.route('/Admin/EditMovieRequest', methods=['POST'])
 def adminEditMovieRequest():
-    pass
+    RequestID = request.json['RequestID']
+    NewRequest = request.json['NewRequest']
+    response = AdminController.EditMovieRequest(NewRequest, RequestID)
+    return response
+
 
 @app.route('/Admin/AddFeedback', methods=['POST'])
 def adminAddFeedback():
@@ -101,6 +106,7 @@ def adminAddFeedback():
     RequestID = request.json['RequestID']
     response = AdminController.AddFeedback(RequestID, Feedback)
     return response
+
 
 @app.route('/Admin/DeleteMovieRequest', methods=['POST'])
 def adminDeleteMovieRequest():

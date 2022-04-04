@@ -18,6 +18,8 @@ def createItem(databaseItem, TableName):
     )
     if response["ResponseMetadata"]['HTTPStatusCode'] == 200:
         return "Successfully Request Inserted", 200
+    else:
+        return "Error Occured Request not inserted", 404
 
 
 def readItem(primaryKeyName, primaryKeyValue, TableName):
@@ -65,9 +67,11 @@ def updateItem(updateKey, updateValue, primaryKeyValue, TableName):
             ':newKey': updateValue
         },
         ReturnValues="UPDATED_NEW")
-    updateDict = {updateKey:updateValue}
+    updateDict = {updateKey: updateValue}
     if response['Attributes'] == updateDict and response["ResponseMetadata"]['HTTPStatusCode'] == 200:
         return "Successfully Request Updated", 200
+    else:
+        return "Error Occured Data not updated", 404
 
 
 def deleteItem(primaryKeyName, primaryKeyValue, TableName):
@@ -78,3 +82,5 @@ def deleteItem(primaryKeyName, primaryKeyValue, TableName):
     )
     if response["ResponseMetadata"]['HTTPStatusCode'] == 200:
         return "Successfully Request Deleted", 200
+    else:
+        return "Error Occured Data not deleted", 404
