@@ -1,4 +1,6 @@
+from email import message
 from utils.DynamoDBUtils import *
+from flask import jsonify
 
 
 def GetAllUserMovieRequests():
@@ -7,8 +9,8 @@ def GetAllUserMovieRequests():
 
 
 def AddFeedback(RequestID, Feedback):
-    response = updateItem("Feedback", Feedback, RequestID, 'User_Requests')
-    return response
+    message, status_code = updateItem("Feedback", Feedback, RequestID, 'User_Requests')
+    return jsonify(message=message, status_code=status_code)
 
 
 def EditMovieRequest(NewRequest, RequestID):
@@ -29,11 +31,11 @@ def EditMovieRequest(NewRequest, RequestID):
             message, status_code = updateItem(
                 "RequestType", RequestType, RequestID, 'User_Requests')
             if status_code == 200:
-                return message, status_code
+                return jsonify(message=message, status_code=status_code)
     else:
-        return "Error Occured during update", 404
+        return jsonify(message="Error Occured during update", status_code=404)
 
 
 def DeleteMovieRequest(RequestID):
-    response = deleteItem("RequestID", RequestID, 'User_Requests')
-    return response
+    message, status_code = deleteItem("RequestID", RequestID, 'User_Requests')
+    return jsonify(message=message, status_code=status_code)

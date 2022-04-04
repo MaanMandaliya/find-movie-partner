@@ -1,3 +1,4 @@
+from flask import jsonify
 from utils.IMDbAPIUtils import *
 from utils.DynamoDBUtils import *
 from utils.SNSUtils import *
@@ -82,11 +83,11 @@ def SaveMovieRequest(movieRequest):
                 success = False
         if success:
             message += f". {len(movies)} Suscription emails has been sent to you. Please accept to find a movie partner for {movies}"
-            return message, 200
+            return jsonify(message=message, status_code=200)
         else:
-            return "Error Occured", 404
+            return jsonify(message="Error Occured", status_code=404)
     else:
-        return message, status_code
+        return jsonify(message=message, status_code=status_code)
 
 
 def GetMovieRequests(Username):
@@ -97,17 +98,17 @@ def GetMovieRequests(Username):
 def DeleteMovieRequest(RequestID, Username):
     Item = readItem("RequestID", RequestID, 'User_Requests')
     if Item['Username'] == Username:
-        response = deleteItem("RequestID", RequestID, 'User_Requests')
-        return response
+        message, status_code = deleteItem("RequestID", RequestID, 'User_Requests')
+        return jsonify(message=message, status_code=status_code)
 
 
 def AddRatings(RequestID, Ratings, Username):
     Item = readItem("RequestID", RequestID, 'User_Requests')
     if Item['Username'] == Username:
-        response = updateItem("Ratings", Ratings, RequestID, 'User_Requests')
-        return response
+        message, status_code = updateItem("Ratings", Ratings, RequestID, 'User_Requests')
+        return jsonify(message=message, status_code=status_code)
     else:
-        return "Access Denied", 404
+        return jsonify(message="Access Denied", status_code=404)
 
 
 def EditMovieRequest(NewRequest, RequestID, Username):
@@ -130,9 +131,9 @@ def EditMovieRequest(NewRequest, RequestID, Username):
                 message, status_code = updateItem(
                     "RequestType", RequestType, RequestID, 'User_Requests')
                 if status_code == 200:
-                    return message, status_code
+                    return jsonify(message=message, status_code=status_code)
     else:
-        return "Access Denied", 404
+        return jsonify(message="Access Denied", status_code=404)
 
 
 def GetProfile(Username):
@@ -157,5 +158,5 @@ def SaveProfile(profile):
             "Amazon Prime": profile['OTT']['Prime']
         }
     }
-    response = createItem(Item, 'User_Profile')
-    return response
+    message, status_code = createItem(Item, 'User_Profile')
+    return jsonify(message=message, status_code=status_code)
