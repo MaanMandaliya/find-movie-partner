@@ -37,36 +37,27 @@ def GetUnknownMovie(genres, year_duration):
     return results_dict
 
 
-def SaveKnownMovieRequest(movieRequest):
+def SaveMovieRequest(movieRequest):
     actual_request = movieRequest['request']
-    Item = {
-        'RequestID': random.randint(1, 1000),
-        'Username': movieRequest['Username'],
-        'MovieRequest': actual_request,
-        'RequestType': "Single",
-        'Movies': [actual_request['title']],
-        'isMatched': False
-    }
-    response = createItem(Item, 'User_Requests')
-    return response
-
-
-def SaveUnknownMovieRequest(movieRequest):
-    actual_request = movieRequest['request']
+    requestType = None
     movies = []
-    for value in actual_request.values():
-        movies.append(value['title'])
+    if "1" in actual_request:
+        for value in actual_request.values():
+            movies.append(value['title'])
+            requestType = "Multiple"
+    else:
+        movies.append(actual_request['title'])
+        requestType = "Single"
     Item = {
         'RequestID': random.randint(1, 1000),
         'Username': movieRequest['Username'],
         'MovieRequest': actual_request,
-        'RequestType': "Multiple",
+        'RequestType': requestType,
         'Movies': movies,
         'isMatched': False
     }
     response = createItem(Item, 'User_Requests')
     return response
-
 
 def GetMovieRequests(Username):
     response = queryItems('Username', Username, 'User_Requests')

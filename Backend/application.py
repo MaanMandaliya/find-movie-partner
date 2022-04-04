@@ -19,7 +19,7 @@ def userGetKnownMovie():
 @app.route('/User/SaveKnownMovie', methods=['POST'])
 def userSaveKnownMovieRequest():
     movieRequest = request.json
-    response = UserController.SaveKnownMovieRequest(movieRequest)
+    response = UserController.SaveMovieRequest(movieRequest)
     return response
 
 
@@ -34,7 +34,7 @@ def userGetUnknownMovie():
 @app.route('/User/SaveUnknownMovie', methods=['POST'])
 def userSaveUnknownMovieRequest():
     movieRequest = request.json
-    response = UserController.SaveUnknownMovieRequest(movieRequest)
+    response = UserController.SaveMovieRequest(movieRequest)
     return response
 
 
@@ -55,6 +55,8 @@ def userDeleteMovieRequest():
 
 @app.route('/User/EditMovieRequest', methods=['POST'])
 def userEditMovieRequest():
+    RequestID = request.json['RequestID']
+    Username = request.json['Username']
     pass
 
 #check the request persist to user or not
