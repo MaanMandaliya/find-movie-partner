@@ -25,10 +25,10 @@ const Search = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: searchstate.title,
-    }).then((response) => {
-      console.log("response for tile===", response);
-    });
+      body: JSON.stringify({title:searchstate.title}),
+    }).then((res)=>res.json()).then(data=>{
+      console.log("data===",data);
+    })
   };
 
   return (
