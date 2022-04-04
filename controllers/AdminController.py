@@ -1,10 +1,11 @@
 from utils.DynamoDBUtils import *
 
-def adminGetAllUserMovieRequests():
+def GetAllUserMovieRequests():
+    response = readAllItems()
+    return response
+
+def EditMovieRequest():
     pass
 
-def adminEditMovieRequest():
-    pass
-
-def adminDeleteMovieRequest():
+def DeleteMovieRequest():
     pass
