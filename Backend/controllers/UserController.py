@@ -76,7 +76,7 @@ def GetMovieRequests(Username):
 
 
 def DeleteMovieRequest(RequestID, Username):
-    Item = readItem(RequestID, 'User_Requests')
+    Item = readItem("RequestID", RequestID, 'User_Requests')
     if Item['Username'] == Username:
         response = deleteItem(RequestID, 'User_Requests')
         return response

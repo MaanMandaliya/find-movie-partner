@@ -2,7 +2,7 @@ from utils.DynamoDBUtils import *
 
 
 def GetAllUserMovieRequests():
-    response = readAllItems()
+    response = readAllItems('User_Requests')
     return response
 
 def AddFeedback(RequestID, Feedback):
@@ -14,5 +14,5 @@ def EditMovieRequest():
 
 
 def DeleteMovieRequest(RequestID):
-    response = deleteItem(RequestID)
+    response = deleteItem(RequestID, 'User_Requests')
     return response
