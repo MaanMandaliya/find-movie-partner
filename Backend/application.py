@@ -1,4 +1,3 @@
-from urllib import response
 from flask import Flask, request
 from flask_cors import CORS
 from controllers import AdminController
@@ -92,6 +91,12 @@ def adminGetAllUserMovieRequests():
 def adminEditMovieRequest():
     pass
 
+@app.route('/Admin/AddFeedback', methods=['POST'])
+def adminAddFeedback():
+    Feedback = request.json['Feedback']
+    RequestID = request.json['RequestID']
+    response = AdminController.AddFeedback(RequestID, Feedback)
+    return response
 
 @app.route('/Admin/DeleteMovieRequest', methods=['POST'])
 def adminDeleteMovieRequest():

@@ -65,8 +65,9 @@ def updateItem(updateKey, updateValue, primaryKeyValue, TableName):
             ':newRatings': updateValue
         },
         ReturnValues="UPDATED_NEW")
-    print(response)
-    return response
+    updateDict = {updateKey:updateValue}
+    if response['Attributes'] == updateDict and response["ResponseMetadata"]['HTTPStatusCode'] == 200:
+        return "Successfully Updated Data", 200
 
 
 def deleteItem(primarykey, TableName):
