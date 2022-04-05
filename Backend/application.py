@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from controllers import AdminController
 from controllers import UserController
 
