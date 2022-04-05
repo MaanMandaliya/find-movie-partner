@@ -24,6 +24,8 @@ const FindMovie = (props) => {
   console.log("yearrange===", years);
   const [movieState, setMovieState] = useState({});
   const [display, setDisplay] = useState(false);
+  const [message, setMessage] = useState("");
+  const [code, setCode] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:5000/User/UnknownMovie", {
@@ -39,6 +41,7 @@ const FindMovie = (props) => {
         console.log("movies==", movies);
         setMovieState(movies);
         setDisplay(true);
+      
       });
   }, [genre, years]);
   const name = localStorage.getItem("name");
@@ -65,6 +68,11 @@ const FindMovie = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log("data====", data);
+        if(data.status_code===200)
+        {
+          setMessage(data.message);
+          setCode(true);
+        }
         
       });
   };
@@ -138,7 +146,7 @@ const FindMovie = (props) => {
   return (
     <div>
       <Layout>
-        {movieState && display ? (
+        {movieState && display && !code ? (
           <div>
             <Grid sx={{ flexGrow: 1 }} style={{ marginBlockStart: "20px" }}>
               <Grid
@@ -151,7 +159,9 @@ const FindMovie = (props) => {
             </Grid>
           </div>
         ) : (
-          <div className="loader"><BallTriangle timeout={5000} color="red" height={180} width={180} /></div>
+          <div className="loader"><BallTriangle timeout={5000} color="red" height={180} width={180} />
+          
+          </div>
         )}
       </Layout>
       <Footer />

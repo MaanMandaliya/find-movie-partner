@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import ConfirmSignUp from "./Containers/ConfirmSignUp";
 import { useState } from "react";
@@ -26,6 +26,7 @@ const App = () => {
   const [gtype, SelectType] = useState();
   const [year, setYear] = useState();
   const [title, setTitle] = useState();
+  const token = localStorage.getItem("token");
 
   const signUpData = (data) => {
     console.log("***********", data);
@@ -65,10 +66,7 @@ const App = () => {
             path="/SelectType"
             element={<SelectTypes genreType={genreTypes} />}
           />
-          <Route
-            path="/Request"
-            element={<Request />}
-          />
+          <Route path="/Request" element={<Request />} />
           {dataState && (
             <Route
               path="/confirmSignUp"

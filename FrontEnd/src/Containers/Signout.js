@@ -11,7 +11,8 @@ const Signout = () => {
   const signingOut = async () => {
     try {
       console.log("session====");
-      await Auth.signOut();
+      Auth.signOut();
+      localStorage.clear();
 
       navigate("/");
     } catch (error) {
@@ -31,7 +32,7 @@ const Signout = () => {
                   backgroundColor: "#6095b8",
                 }}
               >
-                <form onSubmit={signingOut}>
+                <form>
                   <Typography
                     variant="h5"
                     style={{ fontWeight: 600 }}
@@ -53,6 +54,7 @@ const Signout = () => {
                           margin: "10px",
                           color: "black",
                         }}
+                        onClick={signingOut}
                         type="submit"
                       >
                         SignOut

@@ -7,9 +7,12 @@ import { useNavigate } from "react-router-dom";
 import applogo1 from "../IMAGES/applogo3.svg";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
+import { useEffect } from "react";
 
 const Home = () => {
   let navigate = useNavigate();
+
+ 
 
   const handleChange = (role) => {
     if (role === "Admin") {

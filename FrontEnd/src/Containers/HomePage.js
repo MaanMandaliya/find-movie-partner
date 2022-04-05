@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { Auth } from "aws-amplify";
+
 import {
   Typography,
   CardActionArea,
@@ -51,7 +51,7 @@ const Homepage = () => {
                 >
                   <CardActionArea>
                     <CardActions>
-                    <CardMedia
+                      <CardMedia
                         component="img"
                         height="100"
                         image={known}
@@ -59,7 +59,11 @@ const Homepage = () => {
                         onClick={handleKnown}
                       />
                       <br></br>
-                      <Typography  gutterBottom variant="button" style={{color:"white"}}>
+                      <Typography
+                        gutterBottom
+                        variant="button"
+                        style={{ color: "white" }}
+                      >
                         Search Movie By Name
                       </Typography>
                     </CardActions>
@@ -83,8 +87,12 @@ const Homepage = () => {
                         alt="green iguana"
                         onClick={handleUnknown}
                       />
-                      <Typography gutterBottom variant="button" style={{color:"white"}}>
-                      Seach Movie By Genres & Years
+                      <Typography
+                        gutterBottom
+                        variant="button"
+                        style={{ color: "white" }}
+                      >
+                        Seach Movie By Genres & Years
                       </Typography>
                     </CardActions>
                   </CardActionArea>
@@ -98,17 +106,20 @@ const Homepage = () => {
                     backgroundColor: "#6095b8",
                   }}
                 >
-                 
                   <CardActionArea>
                     <CardActions>
-                    <CardMedia
+                      <CardMedia
                         component="img"
                         height="100"
                         image={request}
                         alt="green iguana"
                         onClick={handleRequest}
                       />
-                      <Typography gutterBottom variant="button" style={{color:"white"}}>
+                      <Typography
+                        gutterBottom
+                        variant="button"
+                        style={{ color: "white" }}
+                      >
                         My requests
                       </Typography>
                     </CardActions>
