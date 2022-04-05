@@ -3,6 +3,7 @@ from utils.IMDbAPIUtils import *
 from utils.DynamoDBUtils import *
 from utils.SNSUtils import *
 import random
+import re
 
 
 def GetKnownMovie(title):
@@ -65,15 +66,17 @@ def SaveMovieRequest(movieRequest):
         success = True
         for movie in movies:
             url = f"https://data-imdb1.p.rapidapi.com/movie/imdb_id/byTitle/{movie}/"
-            response = callIMDbAPI(url)
-            imdb_id = response['results'][0]['imdb_id']
+            # Old method to get IMDb id for topic name
+            # response = callIMDbAPI(url)
+            # imdb_id = response['results'][0]['imdb_id']
             topics = get_sns_topic_names()
+            movie = re.sub('\W+', '', movie)
             # If topic does not exist then create it
-            if imdb_id not in topics:
-                topic_arn = create_sns_topic(imdb_id)
+            if movie not in topics:
+                topic_arn = create_sns_topic(movie)
             # If topic does exist then get topic arn
             else:
-                topic_arn = get_sns_topic_arn(imdb_id)
+                topic_arn = get_sns_topic_arn(movie)
             response = subscribe_sns(
                 TopicArn=topic_arn, Protocol="email", Endpoint=Email)
             # Subscription ARN, it will be required to unsubscribe
@@ -97,14 +100,16 @@ def GetMovieRequests(Username):
 def DeleteMovieRequest(RequestID, Username):
     Item = readItem("RequestID", RequestID, 'User_Requests')
     if Item['Username'] == Username:
-        message, status_code = deleteItem("RequestID", RequestID, 'User_Requests')
+        message, status_code = deleteItem(
+            "RequestID", RequestID, 'User_Requests')
         return jsonify(message=message, status_code=status_code)
 
 
 def AddRatings(RequestID, Ratings, Username):
     Item = readItem("RequestID", RequestID, 'User_Requests')
     if Item['Username'] == Username:
-        message, status_code = updateItem("Ratings", Ratings, RequestID, 'User_Requests')
+        message, status_code = updateItem(
+            "Ratings", Ratings, RequestID, 'User_Requests')
         return jsonify(message=message, status_code=status_code)
     else:
         return jsonify(message="Access Denied", status_code=404)
