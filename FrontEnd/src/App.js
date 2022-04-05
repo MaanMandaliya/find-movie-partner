@@ -18,6 +18,7 @@ import AdminSignIn from "./Containers/adminsignin";
 import SelectYear from "./Containers/SelectYear";
 import SelectTypes from "./Containers/SelectType";
 import Signout from "./Containers/Signout";
+import Profile from "./Containers/Profile";
 
 const App = () => {
   const [dataState, setDataState] = useState();
@@ -69,6 +70,8 @@ const App = () => {
               element={<ConfirmSignUp dataToSignIn={dataState} />}
             />
           )}
+
+          <Route path="/Profile" element={<Profile />} />
           {title && (
             <Route path="/SeeMovie" element={<SeeMovie title={title} />} />
           )}

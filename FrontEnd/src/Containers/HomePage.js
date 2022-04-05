@@ -42,7 +42,7 @@ const Homepage = () => {
                   sx={{
                     height: 200,
                     width: 200,
-                    backgroundColor: "lightgoldenrodyellow",
+                    backgroundColor: "#6095b8",
                   }}
                 >
                   <CardActionArea>
@@ -54,8 +54,9 @@ const Homepage = () => {
                         alt="green iguana"
                         onClick={handleKnown}
                       />
-                      <Typography gutterBottom variant="button">
-                        Known Movie Partner
+                      <br></br>
+                      <Typography  gutterBottom variant="button" style={{color:"white"}}>
+                        Search Movie By Name
                       </Typography>
                     </CardActions>
                   </CardActionArea>
@@ -66,7 +67,7 @@ const Homepage = () => {
                   sx={{
                     height: 200,
                     width: 200,
-                    backgroundColor: "lightgoldenrodyellow",
+                    backgroundColor: "#6095b8",
                   }}
                 >
                   <CardActionArea>
@@ -78,8 +79,8 @@ const Homepage = () => {
                         alt="green iguana"
                         onClick={handleUnknown}
                       />
-                      <Typography gutterBottom variant="button">
-                        UnKnown Movie Partner
+                      <Typography gutterBottom variant="button" style={{color:"white"}}>
+                      Seach Movie By Genres & Years
                       </Typography>
                     </CardActions>
                   </CardActionArea>
@@ -90,13 +91,13 @@ const Homepage = () => {
                   sx={{
                     height: 200,
                     width: 200,
-                    backgroundColor: "lightgoldenrodyellow",
+                    backgroundColor: "#6095b8",
                   }}
                 >
                   <CardMedia src=""></CardMedia>
                   <CardActionArea>
                     <CardActions>
-                      <Typography gutterBottom variant="button">
+                      <Typography gutterBottom variant="button" style={{color:"white"}}>
                         My requests
                       </Typography>
                     </CardActions>

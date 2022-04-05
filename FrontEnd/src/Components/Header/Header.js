@@ -16,7 +16,6 @@ import { Typography } from "@mui/material";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
-
 const useStyles = makeStyles({
   root: {
     background: "#1A374D",
@@ -35,7 +34,6 @@ const useStyles = makeStyles({
 });
 
 export default function Header(props) {
- 
   const classes = useStyles();
 
   return (
@@ -53,18 +51,18 @@ export default function Header(props) {
           >
             <img src={applogo3} alt="logo" className="App-logo"></img>
             Movie Partner
-           
           </Typography>
-        
         </Container>
       </Navbar>
 
       <Nav>
         <div></div>
         <NavMenu>
-        <NavLink to="/HomePage"> <Button variant="contained" className={classes.root}>
-            Homepage
-          </Button>
+          <NavLink to="/HomePage">
+            {" "}
+            <Button variant="contained" className={classes.root}>
+              Homepage
+            </Button>
           </NavLink>
           <Button variant="contained" className={classes.root}>
             Help
@@ -74,13 +72,11 @@ export default function Header(props) {
 
         <Bars onClick={props.toggle} />
         <NavMenu>
-          <NavLink to="/Signin">
+          <NavLink to="/Profile">
             <RiLoginBoxFill />
-            SignIn
+            Profile
           </NavLink>
-          <NavLink to="/Signup">
-            <BsPersonPlusFill /> Sign-up
-          </NavLink>
+
           <NavLink to="/Signout">
             <BsPower /> SignOut
           </NavLink>

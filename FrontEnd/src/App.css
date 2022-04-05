@@ -3,6 +3,11 @@
 }
 
 .App-logo {
+  height: 07vmin;
+  pointer-events: none;
+  align-items: center;
+}
+.App-logo1 {
   height: 09vmin;
   pointer-events: none;
   align-items: center;
@@ -69,4 +74,18 @@
   height: 40px;
   border: 1px solid rgb(245, 248, 248);
   margin-top: 20px;
+}
+.loader{
+  position: absolute;
+  z-index: 999;
+  height: 10em;
+  width: 5em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+
 }

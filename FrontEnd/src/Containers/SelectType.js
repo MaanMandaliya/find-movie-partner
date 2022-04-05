@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 import { CardActionArea } from "@material-ui/core";
-import { Card, Button, CardContent } from "@mui/material";
+import { Card, Button, CardContent, CardActions, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 // import { Toast, ToastContainer } from "react-bootstrap";
@@ -90,20 +90,23 @@ const SelectTypes = (props) => {
                       sx={{
                         height: 40,
                         width: 200,
-                        backgroundColor: "cornsilk",
+                        backgroundColor: "#6095b8",
+                        color:"white"
                       }}
                     >
                       <CardActionArea>
-                        <CardContent>
-                          <Button
+                        <CardActions>
+                       
+                          <Typography
                             onClick={() => {
                               storeType(items);
                             }}
                             variant="button"
                           >
                             {items}
-                          </Button>
-                        </CardContent>
+                          </Typography>
+                       
+                        </CardActions>
                       </CardActionArea>
                     </Card>
                   </Grid>
@@ -113,9 +116,9 @@ const SelectTypes = (props) => {
             <div className="centerButton">
               <Button
                 style={{
-                  backgroundColor: "whitesmoke",
+                  backgroundColor: "#1A374D",
                   borderColor: "blue",
-                  color: "black",
+                  color: "white",
                 }}
                 onClick={selectYear}
                 type="submit"

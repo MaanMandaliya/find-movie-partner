@@ -78,15 +78,15 @@ const Signup = (props) => {
           <Grid item xs={6} md={12}>
             <Paper
               elevation={4}
-              style={{ padding: "2%", backgroundColor: "white" }}
+              style={{ padding: "2%", backgroundColor: "#6095b8" }}
             >
               <Typography
-                variant="h3"
                 style={{
                   fontWeight: 400,
-                  color: "goldenrod",
+                  color: "white",
                   textAlign: "center",
                   textDecoration: "underline",
+                  fontSize: "20px",
                 }}
               >
                 <img src={applogo3} alt="logo" className="App-logo"></img>
@@ -113,6 +113,7 @@ const Signup = (props) => {
                   required
                   value={formValue.name}
                   onChange={changeHandler}
+                  style={{ backgroundColor: "white", color: "black" }}
                 />
 
                 <TextField
@@ -125,6 +126,7 @@ const Signup = (props) => {
                   label="Email"
                   variant="outlined"
                   required
+                  style={{ backgroundColor: "white", color: "black" }}
                   value={formValue.email}
                   onChange={changeHandler}
                 />
@@ -139,6 +141,7 @@ const Signup = (props) => {
                   label="Password"
                   variant="outlined"
                   required
+                  style={{ backgroundColor: "white", color: "black" }}
                   value={formValue.password}
                   onChange={changeHandler}
                 />
@@ -147,7 +150,7 @@ const Signup = (props) => {
                   variant="contained"
                   size="large"
                   style={{
-                    backgroundColor: "#154001",
+                    backgroundColor: "black",
                     alignItems: "center",
                     margin: "10px",
                   }}
@@ -161,7 +164,7 @@ const Signup = (props) => {
                     variant="h5"
                     style={{
                       fontWeight: 600,
-                      color: "blue",
+                      color: "black",
                       textAlign: "end",
                       textDecoration: "underline",
                     }}

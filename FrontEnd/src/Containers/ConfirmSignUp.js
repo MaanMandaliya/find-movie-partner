@@ -47,13 +47,13 @@ const ConfirmSignUp = (props) => {
           <Grid item xs={6} md={12}>
             <Paper
               elevation={4}
-              style={{ padding: "2%", backgroundColor: "white" }}
+              style={{ padding: "2%", backgroundColor: "#6095b8" }}
             >
               <Typography
                 variant="h3"
                 style={{
                   fontWeight: 400,
-                  color: "goldenrod",
+                  color: "white",
                   textAlign: "center",
                   textDecoration: "underline",
                 }}
@@ -82,13 +82,14 @@ const ConfirmSignUp = (props) => {
                   required
                   value={data.code}
                   onChange={changeHandler}
+                  style={{ backgroundColor: "white", color: "black" }}
                 />
 
                 <Button
                   variant="contained"
                   size="large"
                   style={{
-                    backgroundColor: "#154001",
+                    backgroundColor: "black",
                     alignItems: "center",
                     margin: "10px",
                   }}

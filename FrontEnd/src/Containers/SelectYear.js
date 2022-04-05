@@ -32,7 +32,7 @@ const SelectYear = (props) => {
       <Layout>
         <div style={{ justifyContent: "center", color: "white" }}>
           {" "}
-          <Typography gutterBottom>
+          <Typography gutterBottom style={{color:"#1A374D"}}>
             Selected Genres are: {props.gtype}
           </Typography>
         </div>
@@ -45,10 +45,10 @@ const SelectYear = (props) => {
                     sx={{
                       height: 200,
                       width: 200,
-                      backgroundColor: "lightgoldenrodyellow",
+                      backgroundColor: "#6095b8",
                     }}
                   >
-                    <Typography gutterBottom>Select Start Year</Typography>
+                    <Typography gutterBottom style={{color:"white"}}>Select Start Year</Typography>
                     <YearPicker
                       views={["year"]}
                       label="Initial Year"
@@ -57,6 +57,7 @@ const SelectYear = (props) => {
                       maxDate={new Date("2021")}
                       value={value.initialDate}
                       name="initialDate"
+                      
                       onChange={(newValue) => {
                         setValue({ ...value, initialDate: newValue });
                       }}
@@ -69,10 +70,10 @@ const SelectYear = (props) => {
                     sx={{
                       height: 200,
                       width: 200,
-                      backgroundColor: "lightgoldenrodyellow",
+                      backgroundColor: "#6095b8",
                     }}
                   >
-                    <Typography gutterbottom>Select End Year</Typography>
+                    <Typography gutterbottom style={{color:"white"}}>Select End Year</Typography>
 
                     <YearPicker
                       views={["year"]}
@@ -90,14 +91,14 @@ const SelectYear = (props) => {
               </Grid>
               {value && (
                 <div style={{ justifyContent: "center", color: "white" }}>
-                  <Typography gutterBottom>
+                  <Typography  gutterBottom style={{color:"#1A374D"}}>
                     Selected Starting Year :{value.initialDate.getFullYear()}
                   </Typography>
                 </div>
               )}
               {value && (
                 <div style={{ justifyContent: "center", color: "white" }}>
-                  <Typography gutterBottom>
+                  <Typography gutterBottom style={{color:"#1A374D"}}>
                     Selected End Year :{value.endDate.getFullYear()}
                   </Typography>
                 </div>
@@ -107,9 +108,9 @@ const SelectYear = (props) => {
           <div className="centerButton">
             <Button
               style={{
-                backgroundColor: "whitesmoke",
+                backgroundColor: "#1A374D",
                 borderColor: "blue",
-                color: "black",
+                color: "white",
               }}
               type="submit"
               onClick={nextPage}

@@ -8,7 +8,6 @@ import applogo1 from "../IMAGES/applogo3.svg";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 
-
 const Home = () => {
   let navigate = useNavigate();
 
@@ -22,20 +21,19 @@ const Home = () => {
   };
 
   return (
-    <div >
-     
+    <div>
       <Grow in>
         <Container style={{ marginTop: 100, width: "97%" }}>
           <Grid item xs={6} md={12}>
             <Paper
               elevation={4}
-              style={{ padding: "2%", backgroundColor: "white" }}
+              style={{ padding: "2%", backgroundColor: "#6095b8" }}
             >
               <Typography
                 variant="h3"
                 style={{
                   fontWeight: 400,
-                  color: "goldenrod",
+                  color: "white",
                   textAlign: "center",
                   textDecoration: "underline",
                 }}
@@ -43,9 +41,12 @@ const Home = () => {
                 <img src={applogo1} alt="logo" className="App-logo"></img>
                 Movie Partner
               </Typography>
-              <Typography variant="h5" style={{ fontWeight: 600,color:"black",textAlign:"center" }}>
-                  Choose Role for SignIn/SignUp!
-                </Typography>
+              <Typography
+                variant="h5"
+                style={{ fontWeight: 600, color: "black", textAlign: "center" }}
+              >
+                Choose Role for SignIn/SignUp!
+              </Typography>
 
               <Box
                 sx={{
@@ -61,14 +62,14 @@ const Home = () => {
                   variant="outlined"
                   aria-label="outlined button group"
                 >
-                  <Button
+                  <Button style={{backgroundColor:"white"}}
                     onClick={() => {
                       handleChange("Admin");
                     }}
                   >
                     Admin
                   </Button>
-                  <Button
+                  <Button style={{backgroundColor:"white"}}
                     onClick={() => {
                       handleChange("User");
                     }}
@@ -81,9 +82,7 @@ const Home = () => {
           </Grid>
         </Container>
       </Grow>
-     
     </div>
-    
   );
 };
 export default Home;

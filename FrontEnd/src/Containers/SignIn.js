@@ -13,12 +13,13 @@ import { Link } from "react-router-dom";
 //import jwt from "jsonwebtoken";
 import jwt_decode from "jwt-decode";
 
-const SignIn = () => {
+const SignIn = (props) => {
   let navigate = useNavigate();
   const [field, setField] = useState({
     email: "",
     password: "",
   });
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -36,6 +37,10 @@ const SignIn = () => {
 
       const decodedToken = jwt_decode(res.signInUserSession.idToken.jwtToken);
       if (decodedToken) {
+        console.log("decodedToken====",decodedToken);
+        
+      localStorage.setItem("name",decodedToken.name);
+      localStorage.setItem("email",decodedToken.email);
         navigate("/HomePage");
       } else {
         alert("UnAuthorized");
@@ -50,15 +55,16 @@ const SignIn = () => {
           <Grid item xs={6} md={12}>
             <Paper
               elevation={4}
-              style={{ padding: "2%", backgroundColor: "white" }}
+              style={{ padding: "2%", backgroundColor: "#6095b8" }}
             >
               <Typography
-                variant="h3"
+                
                 style={{
                   fontWeight: 400,
-                  color: "goldenrod",
+                  color: "white",
                   textAlign: "center",
                   textDecoration: "underline",
+                  fontSize:"20px"
                 }}
               >
                 <img src={applogo3} alt="logo" className="App-logo"></img>
@@ -85,6 +91,7 @@ const SignIn = () => {
                   required
                   value={field.email}
                   onChange={handleChange}
+                  style={{ backgroundColor: "white", color: "black" }}
                 />
 
                 <TextField
@@ -99,13 +106,14 @@ const SignIn = () => {
                   required
                   value={field.password}
                   onChange={handleChange}
+                  style={{ backgroundColor: "white", color: "black" }}
                 />
 
                 <Button
                   variant="contained"
                   size="large"
                   style={{
-                    backgroundColor: "#154001",
+                    backgroundColor: "black",
                     alignItems: "center",
                     margin: "10px",
                   }}
@@ -119,7 +127,7 @@ const SignIn = () => {
                     variant="h5"
                     style={{
                       fontWeight: 600,
-                      color: "blue",
+                      color: "black",
                       textAlign: "end",
                       textDecoration: "underline",
                     }}

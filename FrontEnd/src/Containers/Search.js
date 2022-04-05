@@ -42,7 +42,7 @@ const Search = (props) => {
                   sx={{
                     height: 500,
                     width: 400,
-                    backgroundColor: "lightgoldenrodyellow",
+                    backgroundColor: "#6095b8",
                   }}
                 >
                   <CardMedia component="img" height="250" image={movie} />
@@ -56,7 +56,8 @@ const Search = (props) => {
                       value={searchstate.title}
                       name="title"
                       onChange={titleHandler}
-                      style={{ marginLeft: "80px" }}
+                      
+                      style={{ marginLeft: "80px" ,backgroundColor:"white",color:"lightgoldenrodyellow" }}
                     />
                     <br />
 

@@ -1,7 +1,6 @@
 .footer {
     color: black;
-    background-image: linear-gradient(to top, #043c41 , #df5a5a);
-    padding-top: 3em;
+    background-image: linear-gradient(to right, #6095b8 , #E4F9F5 50%);
     width: 100%;
     position:relative;
     display: flex;

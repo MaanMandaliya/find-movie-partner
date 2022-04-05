@@ -5,6 +5,7 @@ import "./Layout.css";
 
 import Header from "../Header/Header";
 import SideBar from "../SideBar/SideBar";
+import Header1 from "../NewHeader/Header";
 
 
 export default function Layout(props) {

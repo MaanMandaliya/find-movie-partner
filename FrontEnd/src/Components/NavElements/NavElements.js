@@ -7,8 +7,8 @@ import {FaTimes} from 'react-icons/fa';
 
 
 export const Nav = styled.nav`
-    background: linear-gradient(to right, #1A374D , #11999E 60%, #E4F9F5);
-    height: 60px;
+background-image: linear-gradient(to right, #6095b8 , #E4F9F5 50%);
+    height: 80px;
     display: flex;
     justify-content: space-between;
     padding: 0.5rem cacl((100vw - 1000px)/2);
@@ -99,7 +99,7 @@ export const NavBtnLink = styled(Link)`
 
     &:hover{
         transition: all 0.2s ease-in-out;
-        background: #fff;
+        background: lightgoldenrodyellow;
         color: #1A374D;
     }
 `
