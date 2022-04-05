@@ -32,17 +32,17 @@ def get_sns_topic_names():
 def publish_message_by_email(TopicArn, Message, Subject):
     sns = get_sns()
     response = sns.publish(TopicArn=TopicArn, Message=Message, Subject=Subject)
-    if response['ResponseMetadata']['HTTPStatusCode']==200:
+    if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         return jsonify(message="Successfully message sent by email", status_code=200)
     else:
         return jsonify(message="Error Occured", status_code=404)
 
 
 def publish_message_by_phone(PhoneNumber, Message):
-    #sends message without subscription
+    # sends message without subscription
     sns = get_sns()
     response = sns.publish(PhoneNumber=PhoneNumber, Message=Message)
-    if response['ResponseMetadata']['HTTPStatusCode']==200:
+    if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         return jsonify(message="Successfully message sent by email", status_code=200)
     else:
         return jsonify(message="Error Occured", status_code=404)

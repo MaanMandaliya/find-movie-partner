@@ -1,10 +1,10 @@
+from pprint import PrettyPrinter
 from flask import jsonify
 from utils.IMDbAPIUtils import *
 from utils.DynamoDBUtils import *
 from utils.SNSUtils import *
 import random
 import re
-import time
 
 
 def GetKnownMovie(title):
@@ -44,45 +44,35 @@ def GetUnknownMovie(genres, year_duration):
 def SaveMovieRequest(movieRequest):
     actual_request = movieRequest['request']
     Email = movieRequest['Email']
-    requestType = None
-    movies = []
-    if "1" in actual_request:
-        for value in actual_request.values():
-            movies.append(value['title'])
-            requestType = "Multiple"
-    else:
-        movies.append(actual_request['title'])
-        requestType = "Single"
+    movie = actual_request['title']
+    RequestID = random.randint(1, 1000)
     Item = {
-        'RequestID': random.randint(1, 1000),
+        'RequestID': RequestID,
         'Username': movieRequest['Username'],
         'MovieRequest': actual_request,
-        'RequestType': requestType,
-        'Movies': movies,
+        'Movie': movie,
         'isMatched': False
     }
     message, status_code = createItem(Item, 'User_Requests')
     if status_code == 200:
         # Check SNS Subscriptions and send email
-        success = True
-        for movie in movies:
-            topics = get_sns_topic_names()
-            movie = re.sub('\W+', '', movie)
-            # If topic does not exist then create it
-            if movie not in topics:
-                topic_arn = create_sns_topic(movie)
-            # If topic does exist then get topic arn
-            else:
-                topic_arn = get_sns_topic_arn(movie)
-            response = subscribe_sns(
-                TopicArn=topic_arn, Protocol="email", Endpoint=Email)
-            # Subscription ARN, it will be required to unsubscribe
-            subscription_arn = response['SubscriptionArn']
-            if response['ResponseMetadata']['HTTPStatusCode'] != 200:
-                success = False
-        if success:
-            message += f". {len(movies)} Suscription emails has been sent to you. Please accept to find a movie partner for {movies}"
-            return jsonify(message=message, status_code=200)
+        topics = get_sns_topic_names()
+        movie = re.sub('\W+', '', movie)
+        # If topic does not exist then create it
+        if movie not in topics:
+            topic_arn = create_sns_topic(movie)
+        # If topic does exist then get topic arn
+        else:
+            topic_arn = get_sns_topic_arn(movie)
+        response = subscribe_sns(
+            TopicArn=topic_arn, Protocol="email", Endpoint=Email)
+        # Subscription ARN, it will be required to unsubscribe
+        subscription_arn = response['SubscriptionArn']
+        message, status_code = updateItem("SubscriptionArn", subscription_arn, RequestID, "User_Requests")
+        if status_code == 200:
+            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+                message += f". Suscription email has been sent to you. Please accept to find a movie partner for {movie}"
+                return jsonify(message=message, status_code=200)
         else:
             return jsonify(message="Error Occured", status_code=404)
     else:
@@ -118,21 +108,14 @@ def EditMovieRequest(NewRequest, RequestID, Username):
         message, status_code = updateItem(
             "MovieRequest", NewRequest, RequestID, 'User_Requests')
         if status_code == 200:
-            Movies = []
-            if "1" in NewRequest:
-                for value in NewRequest.values():
-                    Movies.append(value['title'])
-                    RequestType = "Multiple"
-            else:
-                Movies.append(NewRequest['title'])
-                RequestType = "Single"
             message, status_code = updateItem(
-                "Movies", Movies, RequestID, 'User_Requests')
+                "Movie", NewRequest['title'], RequestID, 'User_Requests')
             if status_code == 200:
-                message, status_code = updateItem(
-                    "RequestType", RequestType, RequestID, 'User_Requests')
-                if status_code == 200:
-                    return jsonify(message=message, status_code=status_code)
+                return jsonify(message=message, status_code=status_code)
+            else:
+                return jsonify(message="Error Occured", status_code=404)
+        else:
+            return jsonify(message="Error Occured", status_code=404)
     else:
         return jsonify(message="Access Denied", status_code=404)
 
@@ -161,3 +144,52 @@ def SaveProfile(profile):
     }
     message, status_code = createItem(Item, 'User_Profile')
     return jsonify(message=message, status_code=status_code)
+
+
+#Old logic to save movie request
+# def SaveMovieRequest(movieRequest):
+#     actual_request = movieRequest['request']
+#     Email = movieRequest['Email']
+#     requestType = None
+#     movies = []
+#     if "1" in actual_request:
+#         for value in actual_request.values():
+#             movies.append(value['title'])
+#             requestType = "Multiple"
+#     else:
+#         movies.append(actual_request['title'])
+#         requestType = "Single"
+#     Item = {
+#         'RequestID': random.randint(1, 1000),
+#         'Username': movieRequest['Username'],
+#         'MovieRequest': actual_request,
+#         'RequestType': requestType,
+#         'Movies': movies,
+#         'isMatched': False
+#     }
+#     message, status_code = createItem(Item, 'User_Requests')
+#     if status_code == 200:
+#         # Check SNS Subscriptions and send email
+#         success = True
+#         for movie in movies:
+#             topics = get_sns_topic_names()
+#             movie = re.sub('\W+', '', movie)
+#             # If topic does not exist then create it
+#             if movie not in topics:
+#                 topic_arn = create_sns_topic(movie)
+#             # If topic does exist then get topic arn
+#             else:
+#                 topic_arn = get_sns_topic_arn(movie)
+#             response = subscribe_sns(
+#                 TopicArn=topic_arn, Protocol="email", Endpoint=Email)
+#             # Subscription ARN, it will be required to unsubscribe
+#             subscription_arn = response['SubscriptionArn']
+#             if response['ResponseMetadata']['HTTPStatusCode'] != 200:
+#                 success = False
+#         if success:
+#             message += f". {len(movies)} Suscription emails has been sent to you. Please accept to find a movie partner for {movies}"
+#             return jsonify(message=message, status_code=200)
+#         else:
+#             return jsonify(message="Error Occured", status_code=404)
+#     else:
+#         return jsonify(message=message, status_code=status_code)
