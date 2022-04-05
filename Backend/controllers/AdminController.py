@@ -1,4 +1,3 @@
-from email import message
 from utils.DynamoDBUtils import *
 from flask import jsonify
 

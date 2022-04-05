@@ -39,7 +39,6 @@ def queryItems(searchKey, searchValue, TableName):
     )
     data = response['Items']
     while 'LastEvaluatedKey' in response:
-        print("Entered")
         response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
         data.extend(response['Items'])
     return {"Items": data}
@@ -51,7 +50,6 @@ def readAllItems(TableName):
     response = table.scan()
     data = response['Items']
     while 'LastEvaluatedKey' in response:
-        print("Entered")
         response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
         data.extend(response['Items'])
     return {"Items": data}

@@ -41,5 +41,7 @@ def create_sns_topic(topic_name):
     topic_arn = response["TopicArn"]
     return topic_arn
 
-def get_subscription_status():
-    pass
+def get_subscriptions(topic_arn):
+    sns = get_sns()
+    topic = sns.get_topic_attributes(topic_arn)
+    return topic['Attributes']['SubscriptionsConfirmed']

@@ -66,7 +66,6 @@ def SaveMovieRequest(movieRequest):
         for movie in movies:
             url = f"https://data-imdb1.p.rapidapi.com/movie/imdb_id/byTitle/{movie}/"
             response = callIMDbAPI(url)
-            print(movie, response)
             imdb_id = response['results'][0]['imdb_id']
             topics = get_sns_topic_names()
             # If topic does not exist then create it
@@ -75,8 +74,6 @@ def SaveMovieRequest(movieRequest):
             # If topic does exist then get topic arn
             else:
                 topic_arn = get_sns_topic_arn(imdb_id)
-            # Item = readItem(
-            #     "Username", movieRequest['Username'], 'User_Profile')
             response = subscribe_sns(
                 TopicArn=topic_arn, Protocol="email", Endpoint=Email)
             if response['ResponseMetadata']['HTTPStatusCode'] != 200:
@@ -142,7 +139,6 @@ def GetProfile(Username):
 
 
 def SaveProfile(profile):
-    # user_email = profile['Email']
     Item = {
         "Username": profile['Username'],
         "Email": profile['Email'],
