@@ -7,19 +7,16 @@ import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 import applogo3 from "../IMAGES/applogo3.svg";
 
-
-
-
 import "../App.css";
 
 const ConfirmSignUp = (props) => {
   let navigate = useNavigate();
-  const { email, password } = props.dataToSignIn;
-  console.log("username as email========", email, password);
+  const { email } = props.dataToSignIn;
 
   const [data, setData] = useState({
     code: "",
   });
+  const [show, setShow] = useState(false);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
@@ -28,20 +25,27 @@ const ConfirmSignUp = (props) => {
 
   const submitForLogin = async (event) => {
     event.preventDefault();
+
     try {
       await Auth.confirmSignUp(email, data.code);
 
       navigate("/Signin");
     } catch (e) {
-      
-
-      console.log(e);
+      alert("Error:", e);
+    }
+  };
+  const resendCode = async (event) => {
+    event.preventDefault();
+    try {
+      await Auth.resendSignUp(email);
+      setShow(true);
+    } catch (e) {
+      alert("Error:", e);
     }
   };
 
   return (
     <div>
-    
       <Grow in>
         <Container style={{ marginTop: 30, width: "97%" }}>
           <Grid item xs={6} md={12}>
@@ -65,7 +69,11 @@ const ConfirmSignUp = (props) => {
               <form onSubmit={submitForLogin}>
                 <Typography
                   variant="h5"
-                  style={{ fontWeight: 600, color: "black" ,textAlign:"center"}}
+                  style={{
+                    fontWeight: 600,
+                    color: "black",
+                    textAlign: "center",
+                  }}
                 >
                   Check Your Email for Confrimation Code!!!
                 </Typography>
@@ -97,12 +105,36 @@ const ConfirmSignUp = (props) => {
                 >
                   Enter Code
                 </Button>
+                <Button
+                  variant="contained"
+                  size="large"
+                  style={{
+                    backgroundColor: "black",
+                    alignItems: "center",
+                    margin: "10px",
+                  }}
+                  type="submit"
+                  onClick={resendCode}
+                >
+                  Resend Code
+                </Button>
+                {show && (
+                  <Typography
+                    variant="h5"
+                    style={{
+                      fontWeight: 600,
+                      color: "black",
+                      textAlign: "center",
+                    }}
+                  >
+                    Code Sent Again Successfully!!!
+                  </Typography>
+                )}
               </form>
             </Paper>
           </Grid>
         </Container>
       </Grow>
-   
     </div>
   );
 };

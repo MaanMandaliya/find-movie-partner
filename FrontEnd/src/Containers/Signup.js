@@ -29,9 +29,6 @@ Amplify.configure({
   },
 });
 
-// You can get the current config object
-//const currentConfig = Auth.configure();
-
 const Signup = (props) => {
   let navigate = useNavigate();
 
@@ -47,7 +44,6 @@ const Signup = (props) => {
   };
 
   const submitData = (event) => {
-    //console.log(formV);
     event.preventDefault();
     const { name, email, password } = formValue;
     console.log(name);
@@ -63,10 +59,9 @@ const Signup = (props) => {
       validationData: [],
     })
       .then((data) => {
-        console.log("++++++++++--------------", data);
         setFormValue(data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert("Error:", err));
     props.dataFromSignUp(formValue);
     navigate("/confirmSignUp");
   };

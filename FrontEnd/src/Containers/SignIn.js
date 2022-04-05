@@ -1,16 +1,12 @@
 import { useState } from "react";
 import { Auth } from "aws-amplify";
-
 import { useNavigate } from "react-router-dom";
-import * as React from "react";
 import applogo3 from "../IMAGES/applogo3.svg";
-
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 import { Link } from "react-router-dom";
-//import jwt from "jsonwebtoken";
 import jwt_decode from "jwt-decode";
 
 const SignIn = (props) => {
@@ -19,7 +15,6 @@ const SignIn = (props) => {
     email: "",
     password: "",
   });
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -33,14 +28,10 @@ const SignIn = (props) => {
       password: field.password,
     });
     if (res) {
-      console.log("response====", res);
-
       const decodedToken = jwt_decode(res.signInUserSession.idToken.jwtToken);
       if (decodedToken) {
-        console.log("decodedToken====",decodedToken);
-        
-      localStorage.setItem("name",decodedToken.name);
-      localStorage.setItem("email",decodedToken.email);
+        localStorage.setItem("name", decodedToken.name);
+        localStorage.setItem("email", decodedToken.email);
         navigate("/HomePage");
       } else {
         alert("UnAuthorized");
@@ -58,13 +49,12 @@ const SignIn = (props) => {
               style={{ padding: "2%", backgroundColor: "#6095b8" }}
             >
               <Typography
-                
                 style={{
                   fontWeight: 400,
                   color: "white",
                   textAlign: "center",
                   textDecoration: "underline",
-                  fontSize:"20px"
+                  fontSize: "20px",
                 }}
               >
                 <img src={applogo3} alt="logo" className="App-logo"></img>

@@ -1,7 +1,7 @@
 import Layout from "../Components/Layout/Layout";
 import Footer from "../Components/Footer/footer";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
+
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Auth } from "aws-amplify";
@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import stranger from "../IMAGES/stranger.svg";
 import known from "../IMAGES/known.svg";
+import request from "../IMAGES/setting.svg";
 import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
@@ -23,6 +24,9 @@ const Homepage = () => {
   };
   const handleKnown = () => {
     navigate("/Search");
+  };
+  const handleRequest = () => {
+    navigate("/Request");
   };
   const Card = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -94,9 +98,16 @@ const Homepage = () => {
                     backgroundColor: "#6095b8",
                   }}
                 >
-                  <CardMedia src=""></CardMedia>
+                 
                   <CardActionArea>
                     <CardActions>
+                    <CardMedia
+                        component="img"
+                        height="100"
+                        image={request}
+                        alt="green iguana"
+                        onClick={handleRequest}
+                      />
                       <Typography gutterBottom variant="button" style={{color:"white"}}>
                         My requests
                       </Typography>

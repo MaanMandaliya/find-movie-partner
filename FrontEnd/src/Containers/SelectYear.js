@@ -33,7 +33,7 @@ const SelectYear = (props) => {
         <div style={{ justifyContent: "center", color: "white" }}>
           {" "}
           <Typography gutterBottom style={{color:"#1A374D"}}>
-            Selected Genres are: {props.gtype}
+            Selected Genres are: <h5 style={{color:"red"}}>{props.gtype}</h5>
           </Typography>
         </div>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -92,14 +92,14 @@ const SelectYear = (props) => {
               {value && (
                 <div style={{ justifyContent: "center", color: "white" }}>
                   <Typography  gutterBottom style={{color:"#1A374D"}}>
-                    Selected Starting Year :{value.initialDate.getFullYear()}
+                    Selected Starting Year :<h5 style={{color:"red"}}>{value.initialDate.getFullYear()}</h5>
                   </Typography>
                 </div>
               )}
               {value && (
                 <div style={{ justifyContent: "center", color: "white" }}>
                   <Typography gutterBottom style={{color:"#1A374D"}}>
-                    Selected End Year :{value.endDate.getFullYear()}
+                    Selected End Year :<h5 style={{color:"red"}}>{value.endDate.getFullYear()}</h5>
                   </Typography>
                 </div>
               )}

@@ -62,14 +62,16 @@ const Home = () => {
                   variant="outlined"
                   aria-label="outlined button group"
                 >
-                  <Button style={{backgroundColor:"white"}}
+                  <Button
+                    style={{ backgroundColor: "white" }}
                     onClick={() => {
                       handleChange("Admin");
                     }}
                   >
                     Admin
                   </Button>
-                  <Button style={{backgroundColor:"white"}}
+                  <Button
+                    style={{ backgroundColor: "white" }}
                     onClick={() => {
                       handleChange("User");
                     }}

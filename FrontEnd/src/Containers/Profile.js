@@ -20,18 +20,18 @@ const Profile = () => {
                 elevation={6}
                 style={{
                   padding: "5%",
-                  backgroundColor: "lightgoldenrodyellow",
+                  backgroundColor: "#6095b8",
                 }}
               >
                 <form>
                   <Typography
                     variant="h5"
-                    style={{ fontWeight: 600 }}
+                    style={{ fontWeight: 600, }}
                   ></Typography>
                   <Box>
                     <Box
                       component="div"
-                      sx={{ dmx: "auto", display: "inline", fontSize: "19px" }}
+                      sx={{ dmx: "auto", display: "inline", fontSize: "19px",color:"white" }}
                     >
                       <b>Viewer Name:</b>
                     </Box>
@@ -57,7 +57,7 @@ const Profile = () => {
                   >
                     <Box
                       component="div"
-                      sx={{ mx: "auto", display: "inline", fontSize: "19px" }}
+                      sx={{ mx: "auto", display: "inline", fontSize: "19px",color:"white" }}
                     >
                       <b>Email:</b>
                     </Box>

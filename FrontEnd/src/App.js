@@ -19,6 +19,7 @@ import SelectYear from "./Containers/SelectYear";
 import SelectTypes from "./Containers/SelectType";
 import Signout from "./Containers/Signout";
 import Profile from "./Containers/Profile";
+import Request from "./Containers/Request";
 
 const App = () => {
   const [dataState, setDataState] = useState();
@@ -63,6 +64,10 @@ const App = () => {
           <Route
             path="/SelectType"
             element={<SelectTypes genreType={genreTypes} />}
+          />
+          <Route
+            path="/Request"
+            element={<Request />}
           />
           {dataState && (
             <Route

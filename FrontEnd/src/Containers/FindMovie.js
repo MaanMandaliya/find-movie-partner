@@ -65,10 +65,7 @@ const FindMovie = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log("data====", data);
-        // if (data.status_code === 200) {
-        //   setCode(true);
-        //   setMessage(data.message);
-        // }
+        
       });
   };
 
