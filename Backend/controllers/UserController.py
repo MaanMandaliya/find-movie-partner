@@ -76,6 +76,8 @@ def SaveMovieRequest(movieRequest):
                 topic_arn = get_sns_topic_arn(imdb_id)
             response = subscribe_sns(
                 TopicArn=topic_arn, Protocol="email", Endpoint=Email)
+            # Subscription ARN, it will be required to unsubscribe
+            subscription_arn = response['SubscriptionArn']
             if response['ResponseMetadata']['HTTPStatusCode'] != 200:
                 success = False
         if success:
@@ -142,6 +144,7 @@ def SaveProfile(profile):
     Item = {
         "Username": profile['Username'],
         "Email": profile['Email'],
+        "Phone": profile['Phone'],
         "Age": profile['Age'],
         "Gender": profile['Gender'],
         "Social Media Profiles": {
