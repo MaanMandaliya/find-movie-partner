@@ -13,7 +13,7 @@ def get_sns():
 def subscribe_sns(TopicArn, Protocol, Endpoint):
     sns = get_sns()
     response = sns.subscribe(
-        TopicArn=TopicArn, Protocol=Protocol, Endpoint=Endpoint)
+        TopicArn=TopicArn, Protocol=Protocol, Endpoint=Endpoint, ReturnSubscriptionArn=True)
     return response
 
 

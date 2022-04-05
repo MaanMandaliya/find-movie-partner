@@ -4,6 +4,7 @@ from utils.DynamoDBUtils import *
 from utils.SNSUtils import *
 import random
 import re
+import time
 
 
 def GetKnownMovie(title):
@@ -65,10 +66,6 @@ def SaveMovieRequest(movieRequest):
         # Check SNS Subscriptions and send email
         success = True
         for movie in movies:
-            url = f"https://data-imdb1.p.rapidapi.com/movie/imdb_id/byTitle/{movie}/"
-            # Old method to get IMDb id for topic name
-            # response = callIMDbAPI(url)
-            # imdb_id = response['results'][0]['imdb_id']
             topics = get_sns_topic_names()
             movie = re.sub('\W+', '', movie)
             # If topic does not exist then create it
