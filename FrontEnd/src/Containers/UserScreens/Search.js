@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import Layout from "../Components/Layout/Layout";
-import Footer from "../Components/Footer/footer";
+import Layout from "../../Components/Layout/Layout";
+import Footer from "../../Components/Footer/footer";
 import TextField from "@mui/material/TextField";
 import { Button, CardContent } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { CardMedia, Card, Typography } from "@mui/material";
-import movie from "../IMAGES/movie.svg";
+import { CardMedia, Card} from "@mui/material";
+import movie from "../../IMAGES/movie.svg";
 import { useNavigate } from "react-router-dom";
 
 const Search = (props) => {

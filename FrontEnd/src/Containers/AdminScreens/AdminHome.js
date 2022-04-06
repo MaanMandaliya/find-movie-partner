@@ -1,9 +1,12 @@
-import Layout from "../Components/Layout/Layout";
-import Footer from "../Components/Footer/footer";
+import Footer from "../../Components/Footer/footer";
+import Layout from "../../Components/AdminLayout/Layout";
 import { styled } from "@mui/material/styles";
 
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import users from "../../IMAGES/users.svg";
+import request from "../../IMAGES/handshake.svg";
+import { useNavigate } from "react-router-dom";
 
 import {
   Typography,
@@ -11,22 +14,16 @@ import {
   CardActions,
   CardMedia,
 } from "@mui/material";
-import stranger from "../IMAGES/stranger.svg";
-import known from "../IMAGES/known.svg";
-import request from "../IMAGES/setting.svg";
-import { useNavigate } from "react-router-dom";
 
-const Homepage = () => {
-  let navigate = useNavigate();
+const AdminHome = () => {
+    let navigate=useNavigate();
+  const handleUsers = () => {
+      navigate("/UserRequests");
+  };
 
-  const handleUnknown = () => {
-    navigate("/SelectType");
-  };
-  const handleKnown = () => {
-    navigate("/Search");
-  };
-  const handleRequest = () => {
-    navigate("/Request");
+  const viewUsers = () => {
+      navigate("/AllUsers");
+   
   };
   const Card = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -35,6 +32,7 @@ const Homepage = () => {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+
   return (
     <div>
       <Layout>
@@ -54,9 +52,9 @@ const Homepage = () => {
                       <CardMedia
                         component="img"
                         height="100"
-                        image={known}
+                        image={request}
                         alt="green iguana"
-                        onClick={handleKnown}
+                        onClick={handleUsers}
                       />
                       <br></br>
                       <Typography
@@ -64,7 +62,7 @@ const Homepage = () => {
                         variant="button"
                         style={{ color: "white" }}
                       >
-                        Search Movie By Name
+                        View/Manage User Request
                       </Typography>
                     </CardActions>
                   </CardActionArea>
@@ -83,44 +81,16 @@ const Homepage = () => {
                       <CardMedia
                         component="img"
                         height="100"
-                        image={stranger}
+                        image={users}
                         alt="green iguana"
-                        onClick={handleUnknown}
+                        onClick={viewUsers}
                       />
                       <Typography
                         gutterBottom
                         variant="button"
                         style={{ color: "white" }}
                       >
-                        Seach Movie By Genres & Years
-                      </Typography>
-                    </CardActions>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-              <Grid item>
-                <Card
-                  sx={{
-                    height: 200,
-                    width: 200,
-                    backgroundColor: "#6095b8",
-                  }}
-                >
-                  <CardActionArea>
-                    <CardActions>
-                      <CardMedia
-                        component="img"
-                        height="100"
-                        image={request}
-                        alt="green iguana"
-                        onClick={handleRequest}
-                      />
-                      <Typography
-                        gutterBottom
-                        variant="button"
-                        style={{ color: "white" }}
-                      >
-                        My requests
+                        View All Users
                       </Typography>
                     </CardActions>
                   </CardActionArea>
@@ -134,4 +104,5 @@ const Homepage = () => {
     </div>
   );
 };
-export default Homepage;
+
+export default AdminHome;

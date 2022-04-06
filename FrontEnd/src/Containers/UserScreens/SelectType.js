@@ -1,14 +1,13 @@
-import Footer from "../Components/Footer/footer";
-import Layout from "../Components/Layout/Layout";
+import Footer from "../../Components/Footer/footer";
+import Layout from "../../Components/Layout/Layout";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 import { CardActionArea } from "@material-ui/core";
-import { Card, Button, CardContent, CardActions, Typography } from "@mui/material";
+import { Card, Button,  CardActions, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-// import { Toast, ToastContainer } from "react-bootstrap";
 
 const SelectTypes = (props) => {
     console.log("props===", props);

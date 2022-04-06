@@ -1,5 +1,5 @@
-import Footer from "../Components/Footer/footer";
-import Layout from "../Components/Layout/Layout";
+import Footer from "../../Components/Footer/footer";
+import Layout from "../../Components/Layout/Layout";
 import { useEffect, useState } from "react";
 import { Toast, ToastContainer } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { BallTriangle } from "react-loader-spinner";
-import "../App.css";
+import "../../App.css";
 
 const FindMovie = (props) => {
   console.log("for movies===", props.forMovies);

@@ -9,18 +9,15 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
-import { Link } from "react-router-dom";
-import applogo3 from "../IMAGES/applogo3.svg";
+
+import jwt_decode from "jwt-decode";
+import applogo3 from "../../IMAGES/applogo3.svg";
 
 const AdminSignIn = () => {
   Amplify.configure({
     Auth: {
-     
-
       // REQUIRED - Amazon Cognito Region
       region: "us-east-1",
-
-     
 
       // OPTIONAL - Amazon Cognito User Pool ID
       userPoolId: "us-east-1_XMmti7bAj",
@@ -48,10 +45,13 @@ const AdminSignIn = () => {
       username: field.email,
       password: field.password,
     });
-    if (res) {
-      console.log("response====", res);
+    if (res.Session) {
+      console.log("response====", res.challengeParam.userAttributes.email);
 
-      navigate("/Home");
+      localStorage.setItem("email", res.challengeParam.userAttributes.email);
+      navigate("/AdminHome");
+    } else {
+      alert("UnAuthorized");
     }
   };
 
@@ -62,13 +62,13 @@ const AdminSignIn = () => {
           <Grid item xs={6} md={12}>
             <Paper
               elevation={4}
-              style={{ padding: "2%", backgroundColor: "white" }}
+              style={{ padding: "2%", backgroundColor: "#6095b8" }}
             >
               <Typography
                 variant="h3"
                 style={{
                   fontWeight: 400,
-                  color: "goldenrod",
+                  color: "white",
                   textAlign: "center",
                   textDecoration: "underline",
                 }}
@@ -80,7 +80,7 @@ const AdminSignIn = () => {
               <form onSubmit={submitForm}>
                 <Typography
                   variant="h5"
-                  style={{ fontWeight: 600, color: "black" }}
+                  style={{ fontWeight: 600, color: "white" }}
                 >
                   SignIn Page
                 </Typography>
@@ -111,13 +111,14 @@ const AdminSignIn = () => {
                   required
                   value={field.password}
                   onChange={handleChange}
+                  style={{backgroundColor:"white"}}
                 />
 
                 <Button
                   variant="contained"
                   size="large"
                   style={{
-                    backgroundColor: "#154001",
+                    backgroundColor: "black",
                     alignItems: "center",
                     margin: "10px",
                   }}

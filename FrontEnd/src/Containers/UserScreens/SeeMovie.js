@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import React from "react";
-import Footer from "../Components/Footer/footer";
-import Layout from "../Components/Layout/Layout";
+import Footer from "../../Components/Footer/footer";
+import Layout from "../../Components/Layout/Layout";
 import { useState } from "react";
 import { CardMedia, Card, Typography, Grid, Button,ButtonGroup } from "@mui/material";
 

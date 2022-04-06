@@ -1,48 +1,69 @@
+import React from "react";
+import Amplify, { Auth } from "aws-amplify";
 import { useState } from "react";
-import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
-import applogo3 from "../IMAGES/applogo3.svg";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 import { Link } from "react-router-dom";
-import jwt_decode from "jwt-decode";
+import applogo3 from "../../IMAGES/applogo3.svg";
+import "../../App.css";
 
-const SignIn = (props) => {
+Amplify.configure({
+  Auth: {
+    // REQUIRED - Amazon Cognito Region
+    region: "us-east-1",
+
+
+    // OPTIONAL - Amazon Cognito User Pool ID
+    userPoolId: "us-east-1_chWAsK7Rx",
+
+    // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+    userPoolWebClientId: "651bv34tvusmr28pts0i0bk858",
+
+    // authenticationFlowType: "USER_PASSWORD_AUTH",
+  },
+});
+
+
+const Signup = (props) => {
+
+  
   let navigate = useNavigate();
-  const [field, setField] = useState({
+
+  const [formValue, setFormValue] = useState({
+    name: "",
     email: "",
     password: "",
   });
 
-  const handleChange = (event) => {
+  const changeHandler = (event) => {
     const { name, value } = event.target;
-    setField({ ...field, [name]: value });
+    setFormValue({ ...formValue, [name]: value });
   };
 
-  const submitForm = async (event) => {
+  const submitData = (event) => {
     event.preventDefault();
-    const res = await Auth.signIn({
-      username: field.email,
-      password: field.password,
-    });
-    if (res) {
-      console.log("response===", res);
+    const { name, email, password } = formValue;
+    console.log(name);
+    console.log(email);
 
-      console.log("current session==", Auth);
-
-      localStorage.setItem("token", res.signInUserSession.idToken.jwtToken);
-      const decodedToken = jwt_decode(res.signInUserSession.idToken.jwtToken);
-      if (decodedToken) {
-        localStorage.setItem("name", decodedToken.name);
-        localStorage.setItem("email", decodedToken.email);
-
-        navigate("/HomePage");
-      } else {
-        alert("UnAuthorized");
-      }
-    }
+    Auth.signUp({
+      username: email,
+      password,
+      attributes: {
+        name,
+        email,
+      },
+      validationData: [],
+    })
+      .then((data) => {
+        setFormValue(data);
+      })
+      .catch((err) => alert("Error:", err));
+    props.dataFromSignUp(formValue);
+    navigate("/confirmSignUp");
   };
 
   return (
@@ -67,13 +88,28 @@ const SignIn = (props) => {
                 Movie Partner
               </Typography>
 
-              <form onSubmit={submitForm}>
+              <form onSubmit={submitData}>
                 <Typography
                   variant="h5"
                   style={{ fontWeight: 600, color: "black" }}
                 >
-                  SignIn Page
+                  SignUp Page
                 </Typography>
+
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  size="normal"
+                  id="firstName"
+                  type="text"
+                  name="name"
+                  label="name"
+                  variant="outlined"
+                  required
+                  value={formValue.name}
+                  onChange={changeHandler}
+                  style={{ backgroundColor: "white", color: "black" }}
+                />
 
                 <TextField
                   fullWidth
@@ -85,9 +121,9 @@ const SignIn = (props) => {
                   label="Email"
                   variant="outlined"
                   required
-                  value={field.email}
-                  onChange={handleChange}
                   style={{ backgroundColor: "white", color: "black" }}
+                  value={formValue.email}
+                  onChange={changeHandler}
                 />
 
                 <TextField
@@ -100,9 +136,9 @@ const SignIn = (props) => {
                   label="Password"
                   variant="outlined"
                   required
-                  value={field.password}
-                  onChange={handleChange}
                   style={{ backgroundColor: "white", color: "black" }}
+                  value={formValue.password}
+                  onChange={changeHandler}
                 />
 
                 <Button
@@ -115,9 +151,9 @@ const SignIn = (props) => {
                   }}
                   type="submit"
                 >
-                  Signin
+                  SignUp
                 </Button>
-                <Link to="/Signup">
+                <Link to="/Signin">
                   {" "}
                   <Typography
                     variant="h5"
@@ -128,7 +164,7 @@ const SignIn = (props) => {
                       textDecoration: "underline",
                     }}
                   >
-                    New User? SignUp Here
+                    Already Have an Account?Click here for SignIn
                   </Typography>
                 </Link>
               </form>
@@ -140,4 +176,4 @@ const SignIn = (props) => {
   );
 };
 
-export default SignIn;
+export default Signup;

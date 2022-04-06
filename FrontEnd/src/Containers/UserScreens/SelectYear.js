@@ -1,5 +1,5 @@
-import Footer from "../Components/Footer/footer";
-import Layout from "../Components/Layout/Layout";
+import Footer from "../../Components/Footer/footer";
+import Layout from "../../Components/Layout/Layout";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import { LocalizationProvider, YearPicker } from "@mui/lab";
 

@@ -1,48 +1,47 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import ConfirmSignUp from "./Containers/ConfirmSignUp";
+import ConfirmSignUp from "./Containers/UserScreens/ConfirmSignUp";
 import { useState } from "react";
 import Home from "./Containers/Home";
-import Homepage from "./Containers/HomePage";
-import SignIn from "./Containers/SignIn";
-import Search from "./Containers/Search";
-import SeeMovie from "./Containers/SeeMovie";
+import Homepage from "./Containers/UserScreens/HomePage";
+import SignIn from "./Containers/UserScreens/SignIn";
+import Search from "./Containers/UserScreens/Search";
+import SeeMovie from "./Containers/UserScreens/SeeMovie";
 
-import Signup from "./Containers/Signup";
-import FindMovie from "./Containers/FindMovie";
+import Signup from "./Containers/UserScreens/Signup";
+import FindMovie from "./Containers/UserScreens/FindMovie";
 
-import AdminSignIn from "./Containers/adminsignin";
+import AdminSignIn from "./Containers/AdminScreens/adminsignin";
 
-import SelectYear from "./Containers/SelectYear";
-import SelectTypes from "./Containers/SelectType";
-import Signout from "./Containers/Signout";
-import Profile from "./Containers/Profile";
-import Request from "./Containers/Request";
+import SelectYear from "./Containers/UserScreens/SelectYear";
+import SelectTypes from "./Containers/UserScreens/SelectType";
+import Signout from "./Containers/UserScreens/Signout";
+import Profile from "./Containers/UserScreens/Profile";
+import Request from "./Containers/UserScreens/Request";
+import AdminHome from "./Containers/AdminScreens/AdminHome";
+import AllUsers from "./Containers/AdminScreens/AllUsers";
+import UserRequests from "./Containers/AdminScreens/UserRequests";
+import AdminProfile from "./Containers/AdminScreens/AdminProfile";
 
 const App = () => {
   const [dataState, setDataState] = useState();
   const [gtype, SelectType] = useState();
   const [year, setYear] = useState();
   const [title, setTitle] = useState();
-  const token = localStorage.getItem("token");
 
   const signUpData = (data) => {
-    console.log("***********", data);
     setDataState(data);
   };
 
   const genreTypes = (types) => {
-    console.log("genreTypes====", types);
     SelectType(types);
   };
   const selectedYear = (years) => {
-    console.log("props from selected year====", years);
     setYear(years);
   };
   const dataFromSearch = (title) => {
-    console.log("props from search====", title);
     setTitle(title);
   };
 
@@ -51,6 +50,10 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/AllUsers" element={<AllUsers />} />
+          <Route path="/AdminProfile" element={<AdminProfile />} />
+          <Route path="/UserRequests" element={<UserRequests />} />
+          <Route path="/AdminHome" element={<AdminHome />} />
           <Route path="/Signin" element={<SignIn />}></Route>
           <Route path="/AdminSignin" element={<AdminSignIn />}></Route>
           <Route

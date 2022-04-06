@@ -1,14 +1,14 @@
-import React from "react";
-import Amplify, { Auth } from "aws-amplify";
 import { useState } from "react";
+import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
+import applogo3 from "../../IMAGES/applogo3.svg";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
 import { Link } from "react-router-dom";
-import applogo3 from "../IMAGES/applogo3.svg";
-import "../App.css";
+import jwt_decode from "jwt-decode";
+import Amplify from "aws-amplify";
 
 Amplify.configure({
   Auth: {
@@ -25,45 +25,40 @@ Amplify.configure({
     // authenticationFlowType: "USER_PASSWORD_AUTH",
   },
 });
-
-
-const Signup = (props) => {
-
-  
+const SignIn = (props) => {
   let navigate = useNavigate();
-
-  const [formValue, setFormValue] = useState({
-    name: "",
+  const [field, setField] = useState({
     email: "",
     password: "",
   });
 
-  const changeHandler = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormValue({ ...formValue, [name]: value });
+    setField({ ...field, [name]: value });
   };
 
-  const submitData = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault();
-    const { name, email, password } = formValue;
-    console.log(name);
-    console.log(email);
+    const res = await Auth.signIn({
+      username: field.email,
+      password: field.password,
+    });
+    if (res) {
+    
 
-    Auth.signUp({
-      username: email,
-      password,
-      attributes: {
-        name,
-        email,
-      },
-      validationData: [],
-    })
-      .then((data) => {
-        setFormValue(data);
-      })
-      .catch((err) => alert("Error:", err));
-    props.dataFromSignUp(formValue);
-    navigate("/confirmSignUp");
+
+
+      localStorage.setItem("token", res.signInUserSession.idToken.jwtToken);
+      const decodedToken = jwt_decode(res.signInUserSession.idToken.jwtToken);
+      if (decodedToken) {
+        localStorage.setItem("name", decodedToken.name);
+        localStorage.setItem("email", decodedToken.email);
+
+        navigate("/HomePage");
+      } else {
+        alert("UnAuthorized");
+      }
+    }
   };
 
   return (
@@ -88,28 +83,13 @@ const Signup = (props) => {
                 Movie Partner
               </Typography>
 
-              <form onSubmit={submitData}>
+              <form onSubmit={submitForm}>
                 <Typography
                   variant="h5"
                   style={{ fontWeight: 600, color: "black" }}
                 >
-                  SignUp Page
+                  SignIn Page
                 </Typography>
-
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  size="normal"
-                  id="firstName"
-                  type="text"
-                  name="name"
-                  label="name"
-                  variant="outlined"
-                  required
-                  value={formValue.name}
-                  onChange={changeHandler}
-                  style={{ backgroundColor: "white", color: "black" }}
-                />
 
                 <TextField
                   fullWidth
@@ -121,9 +101,9 @@ const Signup = (props) => {
                   label="Email"
                   variant="outlined"
                   required
+                  value={field.email}
+                  onChange={handleChange}
                   style={{ backgroundColor: "white", color: "black" }}
-                  value={formValue.email}
-                  onChange={changeHandler}
                 />
 
                 <TextField
@@ -136,9 +116,9 @@ const Signup = (props) => {
                   label="Password"
                   variant="outlined"
                   required
+                  value={field.password}
+                  onChange={handleChange}
                   style={{ backgroundColor: "white", color: "black" }}
-                  value={formValue.password}
-                  onChange={changeHandler}
                 />
 
                 <Button
@@ -151,9 +131,9 @@ const Signup = (props) => {
                   }}
                   type="submit"
                 >
-                  SignUp
+                  Signin
                 </Button>
-                <Link to="/Signin">
+                <Link to="/Signup">
                   {" "}
                   <Typography
                     variant="h5"
@@ -164,7 +144,7 @@ const Signup = (props) => {
                       textDecoration: "underline",
                     }}
                   >
-                    Already Have an Account?Click here for SignIn
+                    New User? SignUp Here
                   </Typography>
                 </Link>
               </form>
@@ -176,4 +156,4 @@ const Signup = (props) => {
   );
 };
 
-export default Signup;
+export default SignIn;

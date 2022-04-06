@@ -1,6 +1,6 @@
 import { Auth } from "aws-amplify";
-import Footer from "../Components/Footer/footer";
-import Layout from "../Components/Layout/Layout";
+import Footer from "../../Components/Footer/footer";
+import Layout from "../../Components/Layout/Layout";
 import { Typography, Container, Grow, Grid, Button } from "@mui/material";
 import { Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";

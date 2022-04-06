@@ -1,5 +1,5 @@
-import Footer from "../Components/Footer/footer";
-import Layout from "../Components/Layout/Layout";
+import Footer from "../../Components/Footer/footer";
+import Layout from "../../Components/Layout/Layout";
 import { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useState } from "react";

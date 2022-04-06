@@ -5,9 +5,9 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Typography, Container, Grow, Grid } from "@mui/material";
 import { Paper } from "@mui/material";
-import applogo3 from "../IMAGES/applogo3.svg";
+import applogo3 from "../../IMAGES/applogo3.svg";
 
-import "../App.css";
+import "../../App.css";
 
 const ConfirmSignUp = (props) => {
   let navigate = useNavigate();
