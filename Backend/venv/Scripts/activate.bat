@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=E:\DAL\5409 Cloud Computing\Movie Partner\Backend code\movie-partner\Backend\venv
+set VIRTUAL_ENV=E:\DAL\5409 Cloud Computing\Movie Partner\Development\movie-partner\Backend\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

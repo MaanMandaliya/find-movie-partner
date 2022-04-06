@@ -1,4 +1,4 @@
-#!E:\DAL\5409 Cloud Computing\Movie Partner\Backend code\movie-partner\Backend\venv\Scripts\python.exe
+#!E:\DAL\5409 Cloud Computing\Movie Partner\Development\movie-partner\Backend\venv\Scripts\python.exe
 
 import sys
 import json
