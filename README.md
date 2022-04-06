@@ -1,5 +1,5 @@
 # Movie Partner
-
+Lambda Code is added just for reference
 
 
 ## Getting started
