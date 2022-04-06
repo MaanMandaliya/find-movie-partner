@@ -1,4 +1,5 @@
 from utils.DynamoDBUtils import *
+from utils.SNSUtils import *
 from flask import jsonify
 
 
@@ -27,5 +28,11 @@ def EditMovieRequest(NewRequest, RequestID):
 
 
 def DeleteMovieRequest(RequestID):
+    Item = readItem("RequestID", RequestID, 'User_Requests')
     message, status_code = deleteItem("RequestID", RequestID, 'User_Requests')
-    return jsonify(message=message, status_code=status_code)
+    SubscriptionArn = Item['SubscriptionArn']
+    response = unsubscribe_topic(SubscriptionArn)
+    if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+            return jsonify(message=message, status_code=status_code)
+    else:
+        return jsonify(message="error occured in deleting request", status_code=404)

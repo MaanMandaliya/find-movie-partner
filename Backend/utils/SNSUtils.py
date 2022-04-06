@@ -70,3 +70,8 @@ def get_subscriptions(topic_arn):
     sns = get_sns()
     topic = sns.get_topic_attributes(topic_arn)
     return topic['Attributes']['SubscriptionsConfirmed']
+
+def unsubscribe_topic(SubscriptionArn):
+    sns = get_sns()
+    response = sns.unsubscribe(SubscriptionArn=SubscriptionArn)
+    return response

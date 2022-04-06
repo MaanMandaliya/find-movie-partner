@@ -82,7 +82,12 @@ def DeleteMovieRequest(RequestID, Username):
     if Item['Username'] == Username:
         message, status_code = deleteItem(
             "RequestID", RequestID, 'User_Requests')
-        return jsonify(message=message, status_code=status_code)
+        SubscriptionArn = Item['SubscriptionArn']
+        response = unsubscribe_topic(SubscriptionArn)
+        if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+            return jsonify(message=message, status_code=status_code)
+        else:
+            return jsonify(message="error occured in deleting request", status_code=404)
 
 
 def AddRatings(RequestID, Ratings, Username):
