@@ -15,15 +15,12 @@ import applogo3 from "../IMAGES/applogo3.svg";
 const AdminSignIn = () => {
   Amplify.configure({
     Auth: {
-      // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
-      identityPoolId: "us-east-1:760a18b5-457a-449f-8708-edcdbb10afe8",
+     
 
       // REQUIRED - Amazon Cognito Region
       region: "us-east-1",
 
-      // OPTIONAL - Amazon Cognito Federated Identity Pool Region
-      // Required only if it's different from Amazon Cognito Region
-      identityPoolRegion: "us-east-1",
+     
 
       // OPTIONAL - Amazon Cognito User Pool ID
       userPoolId: "us-east-1_XMmti7bAj",

@@ -15,9 +15,6 @@ Amplify.configure({
     // REQUIRED - Amazon Cognito Region
     region: "us-east-1",
 
-    // OPTIONAL - Amazon Cognito Federated Identity Pool Region
-    // Required only if it's different from Amazon Cognito Region
-    identityPoolRegion: "us-east-1",
 
     // OPTIONAL - Amazon Cognito User Pool ID
     userPoolId: "us-east-1_chWAsK7Rx",
@@ -29,7 +26,10 @@ Amplify.configure({
   },
 });
 
+
 const Signup = (props) => {
+
+  
   let navigate = useNavigate();
 
   const [formValue, setFormValue] = useState({

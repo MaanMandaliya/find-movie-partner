@@ -3,7 +3,7 @@ import React from "react";
 import Footer from "../Components/Footer/footer";
 import Layout from "../Components/Layout/Layout";
 import { useState } from "react";
-import { CardMedia, Card, Typography, Grid, Button } from "@mui/material";
+import { CardMedia, Card, Typography, Grid, Button,ButtonGroup } from "@mui/material";
 
 import { Toast, ToastContainer } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -81,9 +81,8 @@ const SeeMovie = (props) => {
                     sx={{
                       height: 600,
                       width: 400,
-                      backgroundColor: "#1b649c",
+                      backgroundColor: "#6095b8",
                     }}
-                    
                   >
                     <CardMedia
                       component="img"
@@ -92,7 +91,7 @@ const SeeMovie = (props) => {
                       alt="green iguana"
                     />
                     <Typography
-                      style={{ marginLeft: "120px" }}
+                      style={{ marginLeft: "120px",color:"white" }}
                       gutterBottom
                       variant="h4"
                     >
@@ -100,12 +99,13 @@ const SeeMovie = (props) => {
                     </Typography>
                     <br></br>
                     <br></br>
+                    <ButtonGroup>
                     <Button
                       style={{
-                        backgroundColor: "ButtonText",
+                        backgroundColor: "#1A374D",
                         borderColor: "red",
                         color: "white",
-                        marginLeft: "",
+                        marginLeft: "0px",
                       }}
                       type="submit"
                       onClick={() => {
@@ -117,10 +117,10 @@ const SeeMovie = (props) => {
 
                     <Button
                       style={{
-                        backgroundColor: "ButtonText",
+                        backgroundColor: "#1A374D",
                         borderColor: "red",
                         color: "white",
-                        marginLeft: "230px",
+                        marginLeft: "70px",
                       }}
                       type="submit"
                       onClick={() => {
@@ -130,6 +130,7 @@ const SeeMovie = (props) => {
                     >
                       Request Movie Partner
                     </Button>
+                    </ButtonGroup>
                   </Card>
                 </Grid>
               </Grid>
@@ -147,17 +148,16 @@ const SeeMovie = (props) => {
                 animation
                 style={{
                   color: "black",
-                  backgroundColor: "lightgoldenrodyellow",
+                  backgroundColor: "lightgreen",
                 }}
                 autohide
               >
-                <Toast.Header>
-                  {<Link to="/HomePage">Go to HomePage</Link>}
-                </Toast.Header>
-
                 <Toast.Body>
                   <Typography gutterBottom variant="h5" component="div">
                     {message}
+                  </Typography>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {<Link to="/HomePage">Go to HomePage</Link>}
                   </Typography>
                 </Toast.Body>
               </Toast>

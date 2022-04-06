@@ -28,12 +28,16 @@ const SignIn = (props) => {
       password: field.password,
     });
     if (res) {
-      localStorage.setItem("token",res.signInUserSession.idToken.jwtToken);
+      console.log("response===", res);
+
+      console.log("current session==", Auth);
+
+      localStorage.setItem("token", res.signInUserSession.idToken.jwtToken);
       const decodedToken = jwt_decode(res.signInUserSession.idToken.jwtToken);
       if (decodedToken) {
         localStorage.setItem("name", decodedToken.name);
         localStorage.setItem("email", decodedToken.email);
-       
+
         navigate("/HomePage");
       } else {
         alert("UnAuthorized");
