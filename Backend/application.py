@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from controllers import AdminController
 from controllers import UserController
 
@@ -114,6 +114,10 @@ def adminDeleteMovieRequest():
     response = AdminController.DeleteMovieRequest(RequestID)
     return response
 
+@app.route('/Admin/GetUserProfiles', methods=['GET'])
+def adminGetUserProfiles():
+    response = AdminController.GetUserProfiles()
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True)

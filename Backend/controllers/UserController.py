@@ -124,21 +124,27 @@ def GetProfile(Username):
 
 
 def SaveProfile(profile):
+    # Item = {
+    #     "Username": profile['Username'],
+    #     "Email": profile['Email'],
+    #     "Phone": profile['Phone'],
+    #     "Age": profile['Age'],
+    #     "Gender": profile['Gender'],
+    #     "Social Media Profiles": {
+    #         "Instagram": profile['SocialMedia']['Instagram'],
+    #         "Facebook": profile['SocialMedia']['Facebook']
+    #     },
+    #     "OTT Subscriptions": {
+    #         "Hotstar": profile['OTT']['Hotstar'],
+    #         "Netflix": profile['OTT']['Netflix'],
+    #         "Amazon Prime": profile['OTT']['Prime']
+    #     }
+    # }
     Item = {
         "Username": profile['Username'],
         "Email": profile['Email'],
         "Phone": profile['Phone'],
-        "Age": profile['Age'],
-        "Gender": profile['Gender'],
-        "Social Media Profiles": {
-            "Instagram": profile['SocialMedia']['Instagram'],
-            "Facebook": profile['SocialMedia']['Facebook']
-        },
-        "OTT Subscriptions": {
-            "Hotstar": profile['OTT']['Hotstar'],
-            "Netflix": profile['OTT']['Netflix'],
-            "Amazon Prime": profile['OTT']['Prime']
-        }
+        "Age": profile['Age']
     }
     message, status_code = createItem(Item, 'User_Profile')
     return jsonify(message=message, status_code=status_code)

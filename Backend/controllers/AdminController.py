@@ -36,3 +36,7 @@ def DeleteMovieRequest(RequestID):
             return jsonify(message=message, status_code=status_code)
     else:
         return jsonify(message="error occured in deleting request", status_code=404)
+
+def GetUserProfiles():
+    response = readAllItems("User_Profile")
+    return response
