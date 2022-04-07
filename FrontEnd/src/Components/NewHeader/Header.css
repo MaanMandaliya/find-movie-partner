@@ -1,0 +1,6 @@
+.CustomNavbar {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    background-image: linear-gradient(to right, #6095b8 , #E4F9F5 50%);
+    height: 80px;
+    font-size: 20px;
+}

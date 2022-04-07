@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="E:\DAL\5409 Cloud Computing\Movie Partner\Backend code\movie-partner\Backend\venv"
+VIRTUAL_ENV="E:\DAL\5409 Cloud Computing\Movie Partner\Development\movie-partner\Backend\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
