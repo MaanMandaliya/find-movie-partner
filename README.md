@@ -1,6 +1,9 @@
 # Movie Partner
-Lambda Code is added just for reference
+Web Application to find a movie partner for specific movie or for random movie based on preference of Genre and Release year.
 
+Project Presentation : YouTube
+
+Technology Stack : Flask, Python, React.js, Docker, AWS
 
 ## Getting started
 
