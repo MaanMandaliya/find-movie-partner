@@ -1,4 +1,4 @@
-# Movie Partner
+# Find Movie Partner
 Web Application to find a movie partner for specific movie or for random movie based on preference of Genre and Release year.
 
 Project Presentation : https://youtu.be/S9h3JdBI8dg
